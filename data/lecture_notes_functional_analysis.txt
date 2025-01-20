@@ -1,0 +1,1387 @@
+--------------------------------------------------------------------------------
+Билет 1
+
+\begin{definition}
+	\textit{Метрическим пространством} называется множество $X$ с \textit{метрикой} \\
+    $\rho : X^2 \to \R$, обладающей следующими свойствами:
+	\begin{enumerate}
+		\item $\forall x, y \in X: \rho(x, y) \geqslant 0$, причем $\rho(x, y) = 0 \lra x = y$
+		\item $\forall x, y \in X: \rho(x, y) = \rho(y, x)$
+		\item $\forall x, y, z \in X: \rho(x, z) \leqslant \rho(x, y) + \rho(y, z)$ (\textit{неравенство треугольника})
+	\end{enumerate}
+\end{definition}
+
+\begin{example}~
+\begin{itemize}
+    \item $X = \mathbb{R}, \; \rho = |x - y|$ -- это метрическое пространство. 
+    \item А вот $X = \mathbb{R}, \; \rho = |x - y|^2$ -- уже нет, так как не выполнено нер-во треугольника $(a + b)^2  \cancel{\leqslant}a^2 + b^2 $, где $a=x-z, \; b=z-y$
+
+    \item $X$ -- любое, $\rho = I_{x \neq y}$ -- метрическое пространство 
+\end{itemize}
+\end{example}
+
+\begin{definition}
+	\textit{Топологическим пространством} называется множество $X$ с системой $\tau \subset 2^X$, обладающей следующими свойствами:
+	\begin{enumerate}
+		\item $\varnothing, X \in \tau$
+		\item $\forall i \in \{1, 2, \ldots, n\}, \;G_i \in \tau $ верно $\bigcap\limits_{i=1}^{n} G_i \in \tau$
+		\item $\forall A $ -- индексирующего множества, $G_\alpha \in \tau, \; \forall \alpha \in A$  верно $ \bigcup\limits_{\alpha \in A}G_\alpha\in \tau$
+	\end{enumerate}
+	
+	Система $\tau$ называется \textit{топологией} на множестве $X$, а элементы системы $\tau$ --- \textit{открытыми множествами}.
+\end{definition}
+
+\begin{example}~
+\begin{itemize}
+    \item $X$ -- любое, $\tau = \{\varnothing, X\}$ -- топологическое пространство с тривиальной топологией
+\end{itemize}
+\end{example}
+
+\begin{theorem}\label{thmGeldMink}
+	Пусть $E$ -- измеримое. Пусть $f, g: E \to [0, +\infty]$ измеримы, и $1 < p < \infty$, $\frac{1}{p} + \frac{1}{q} = 1$. Тогда справедливо \textit{неравенство Гёльдера} 
+ \[\int_Efgd\mu \leqslant \left(\int_Ef^pd\mu\right)^{\frac 1p} \cdot \left(\int_Eg^qd\mu\right)^{\frac 1q}\]
+и \textit{неравенство Минковского}
+ \[\left(\int_E(f + g)^pd\mu\right)^{\frac 1p} \leqslant \left(\int_Ef^pd\mu\right)^{\frac 1p} + \left(\int_Eg^pd\mu\right)^{\frac 1p}\]
+\end{theorem}
+
+\begin{proof}
+	Идея: вспоминаем матан. Пользуемся неравенством Юнга: 
+ $$a,b \geqslant 0, \;\;\; 1 < p < \infty, \;\;\; \frac{1}{p} + \frac{1}{q} = 1 \quad \Rightarrow \quad ab \leqslant \frac{a^p}{p} + \frac{b^q}{q}$$
+
+\begin{enumerate}
+    \item Положим $A = \left(\int_Ef^pd\mu\right)^{\frac 1p}, \;\; B= \left(\int_Eg^qd\mu\right)^{\frac 1q}$ \\
+    Если $A = 0 \Rightarrow f = 0$ п.в. на $E \Rightarrow fg = 0$ п.в. на $E \Rightarrow \int_Efgd\mu = 0$  \\
+    Если $A = \infty$ и $ B > 0 $, то $ AB = \infty$. И аналогично оба случая заменой $A$ на $B$.\\
+    Если $0 < A, B < \infty \Rightarrow $ по неравенству Юнга имеем
+ \[\frac{1}{AB}\int_Efgd\mu  = \int_E\frac{f}{A}\frac{g}{B}d\mu 
+ \leqslant \int_E\left(\frac{1}{p}\left(\frac{f}{A}\right)^p + \frac{1}{q}\left(\frac{g}{B}\right)^q\right)d\mu = \frac{1}{p}\frac{\int_Ef^pd\mu}{A^p} + \frac{1}{q}\frac{\int_Eg^qd\mu}{B^q} = \frac{1}{p} + \frac{1}{q} = 1\]
+
+    \item Положим $a = \left(\int_Ef^pd\mu\right)^{\frac 1p}, \;\; b = \left(\int_Eg^pd\mu\right)^{\frac 1p}, \;\; c = \left(\int_E(f + g)^pd\mu\right)^{\frac 1p}$. Хотим $c \leqslant a + b$ \\
+    Если $a = +\infty$ или $b =+\infty$, то неравенство верно. \\
+    Будем полагать, что $a, b < \infty$. Тогда 
+    \[(f+g)^p \leqslant (2  \max\{f,g\})^p \leqslant 2^p (f^p + g^p) \quad \Rightarrow \quad c < \infty \text{  так как интегралы $f^p, g^p$ конечны}\]
+    Тогда так как $\frac{1}{p} + \frac{1}{q} = 1 \;\; \Rightarrow \;\; p = (p-1)q$ получаем:
+    \begin{align*}
+        c^p &= \int_Ef(f+g)^{p-1}d\mu + \int_Eg(f+g)^{p-1}d\mu \leqslant \text{ по нерванству Гёльдера} \\
+        &\leqslant \left(\int_Ef^pd\mu\right)^{\frac{1}{p}} \left(\int_E(f+g)^{(p-1)q}d\mu\right)^{\frac{1}{q}} +
+        \left(\int_Eg^pd\mu\right)^{\frac{1}{p}} \left(\int_E(f+g)^{(p-1)q}d\mu\right)^{\frac{1}{q}} = \\
+        & = (a + b) \left(\int_E(f+g)^{p}d\mu\right)^{\frac{1}{q}} = (a + b) \left(\int_E(f+g)^{p}d\mu\right)^{\frac{p-1}{p}} = (a + b) c^{p-1}
+    \end{align*}
+    Так как если $c = 0 \Rightarrow a,b=0$, то можем поделить все на $c^{p-1}$. Получили требуемое.
+\end{enumerate}
+\end{proof}
+
+\begin{example}
+    \hyperref[sec:table_of_examples]{Таблица метрических пространств и их свойства}
+\end{example}
+
+
+
+
+\begin{definition}
+	Пусть $X$ "--- МП, $Y \subset X$. \textit{Подространством} пространства $X$ называется метрическое пространство $Y$ с метрикой, являющейся сужением метрики на $X$.
+\end{definition}
+
+\begin{definition}
+	Пусть $X$ "--- МП. Множество $Y \subset X$ называется \textit{ограниченным}, если выполнено условие $\sup\limits_{x, y \in Y} \rho(x, y) < +\infty$.
+\end{definition}
+
+\begin{note}
+	Далее в этом разделе мы стремимся показать, что каждое МП является ТП с топологией определенного вида, заданной метрикой пространства.
+\end{note}
+
+\begin{definition}
+	Пусть $X$ "--- МП, $x \in X$, $r > 0$.
+	\begin{itemize}
+		\item \textit{Открытым шаром} называется множество $B(x, r) := \{y \in X: \rho(y, x) < r\}$
+		
+		\item \textit{Замкнутым шаром} называется множество $\overline B(x, r) := \{y \in X: \rho(y, x) \leqslant r\}$
+	\end{itemize}
+\end{definition}
+\begin{note}
+Также достаточно часто используются альтернативные обозначения шаров: \(B_r(x):=B(x, r)\) и \(\overline B_r(x):= \overline B(x, r)\).
+\end{note}
+
+\begin{definition}
+	Пусть $X$ "--- МП, $M \subset X$. Точка $x \in X$ называется \textit{внутренней точкой} множества $M$, если существует $r > 0$ такое, что $B(x, r) \subset M$. \textit{Внутренностью} множества $M$ называется множество $\Int{M}$ всех его внутренних точек. Множество $M$ называется \textit{открытым}, если $\Int{M} = M$.
+\end{definition}
+
+\begin{definition}
+	Пусть $(X, \rho)$ "--- МП, $M \subset X$. Точка $x \in X$ назы\-вается \textit{точкой прикосновения} множества $M$, если для любого $r > 0$ выполнено условие $B(x, r) \cap M \neq \varnothing$. \textit{Замыканием} множества $M$ называется множество $\overline M$ всех его точек прикосновения. Множество $M$ называется \textit{замкнутым}, если $\overline M = M$.
+\end{definition}
+
+\begin{theorem}\label{thm1.1}
+	Пусть $X$ "--- МП, $M \subset X$. Тогда множество $M$ открыто $\lra$ множество $X \bs M$ замкнуто.
+\end{theorem}
+
+\begin{proof}
+	Достаточно заметить, что $x \in \overline{X \bs M} \lra$ для любого $r > 0$ выполнено $B(x, r) \cap (X \bs M) \neq \varnothing$ $\lra x \not\in \Int{M}$. Значит, $\Int M = M\lra \overline{X \bs M} = X \bs M$.
+\end{proof}
+
+\begin{note}
+	Отметим отдельно, что для любого множества $M \subset X$ выполнены равенства $\overline{X \bs M} = X \bs \Int M$ и $\Int{(X \bs M)} = X \bs \overline M$.
+\end{note}
+
+\begin{theorem}\label{thm1.2}
+	Пусть $X$ "--- МП. Тогда:
+	\begin{enumerate}
+		\item Для любой системы открытых множеств $\{G_\alpha\}_{\alpha \in  A} \subset 2^X$ множество $\bigcup\limits_{\alpha \in  A} G_{\alpha}$ тоже является открытым
+
+		\item Для любых открытых множеств $G_1, G_2 \subset X$ множество $G_1 \cap G_2$ тоже является открытым
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}~
+	\begin{enumerate}
+		\item Пусть $x \in \bigcup\limits_{\alpha \in  A} G_\alpha$, тогда существует $\alpha_0 \in  A$ такое, что $x \in G_{\alpha_0}$. Но множество $G_{\alpha_0}$ является открытым, поэтому существует $r > 0$ такое, что $B(x, r) \subset G_{\alpha_0} \subset \bigcup\limits_{\alpha \in  A} G_{\alpha}$. Значит, множество $\bigcup\limits_{\alpha \in  A} G_{\alpha}$ является открытым.
+
+		\item Пусть $x \in G_1 \cap G_2$, тогда существуют $r_1, r_2 > 0$ такие, что выполнено $B(x, r_1) \subset G_1$ и $B(x, r_2) \subset G_2$, откуда $B(x, \min(r_1, r_2)) \subset G_1 \cap G_2$. Значит, множество $G_1 \cap G_2$ является открытым.\qedhere
+	\end{enumerate}
+\end{proof}
+
+\begin{note}
+	В силу теоремы \ref{thm1.1}, теорему выше можно сформулировать и для замкнутых множеств:
+	\begin{enumerate}
+		\item Для любой системы замкнутых множеств $\{F_\alpha\}_{\alpha \in  A} \subset 2^X$ множество $\bigcap\limits_{\alpha \in  A} F_{\alpha}$ тоже является замкнутым
+
+		\item Для любых замкнутых множеств $F_1, F_2 \subset X$ множество $G_1 \cup G_2$ тоже является замкнутым
+	\end{enumerate}
+
+	Обе этих формулировки эквивалентны тому, что МП $X$ также является ТП с топологией, заданной открытыми множествами в $X$ как в метрическом пространстве.
+\end{note}
+
+\begin{note}
+	Не всякое ТП является \textit{метризуемым}, то есть таким, что топология в нем порождается некоторой метрикой. Главным примером неметризуемого топологического пространства является пространство $D = C_C^{\infty}(\mathbb{R})$ основных функций (так как нет такой метрики, которая сохраняла бы сходимость по $D$).
+\end{note}
+
+\begin{theorem}\label{thm1.3}
+	Пусть $X$ "--- МП. Тогда:
+	\begin{enumerate}
+		\item Для любого $x \in X$ и $r > 0$ множество $B(x, r)$ "--- открытое
+		\item Для любого $x \in X$ и $r > 0$ множество $\overline B(x, r)$ "--- замкнутое
+		\item Для любого множества $M \subset X$ множество $\Int M$ "--- открытое, причем наибольшее по включению открытое множество, содержащееся в $M$
+		\item Для любого множества $M \subset X$ множество $\overline M$ "--- замкнутое, причем наименьшее по включению замкнутое множество, содержащее $M$
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}~
+	\begin{enumerate}
+		\item Пусть $y \in B(x, r)$, тогда, по неравенству треугольника, $B\big(y, r - \rho(x, y)\big) \subset B(x, r)$, то есть $y \in \Int B(x, r)$.
+		
+		\item Пусть $y \in \overline{\overline B(x, r)}$, тогда для любого $\varepsilon > 0$ выполнено $B(y, \varepsilon) \cap \overline B(x, r) \neq \varnothing$, откуда, по неравенству треугольника, $\rho(x, y) < r + \varepsilon$. В силу произвольности числа $\varepsilon$, получарем, что $\rho(x, y) \leqslant r$, то есть $y \in \overline B(x, r)$.
+		
+		\item Для любого открытого множества $G \subset M$ выполнено $G = \Int G \subset \Int M$, поэтому, в частности, множество $\Int M$ открыто как объединение всех содержащихся в $M$ открытых множеств.
+  
+		\item Для любого замкнутого множества $F \supset M$ выполнено $F = \overline F \supset \overline M$, поэтому, в частности, множество $\overline M$ замкнуто как пересечение всех содержащих $M$ замкнутых множеств.\qedhere
+	\end{enumerate}
+\end{proof}
+
+\begin{definition}
+	Пусть $X$ "--- МП. Множество $A \subset X$ называется:
+	\begin{itemize}
+		\item \textit{Плотным} в множестве $B \subset X$, если $B \subset \overline {A}$
+ 
+		\item \textit{Всюду плотным}, если $X = \overline {A}$
+	\end{itemize}
+\end{definition}
+
+\begin{definition}\label{separability}
+	МП $X$ называется \textit{сепарабельным}, если в $X$ существует не более чем счетное всюду плотное множество.
+\end{definition}
+
+\begin{definition}
+	Пусть $X$ "--- МП. Последовательность $\{x_n\} \subset X$ \textit{сходится} к точке $x \in X$, если $\rho(x_n, x) \to 0$ при $n \to \infty$. Обозначение "--- $x_n \xrightarrow[X]{} x$.
+\end{definition}
+
+\begin{note}
+	Замкнутые множества в МП $X$ можно определить в терминах сходимости: множество $F \subset X$ является замкнутым $\lra$ для любой последовательности $\{x_n\} \subset F$ такой, что $x_n \xrightarrow[X]{} x \in X$, выполнено $x \in F$.
+\end{note}
+
+\begin{note}
+	В произвольном ТП тоже можно определить сходимость, переписав определение выше в терминах открытых окрестностей, однако в общем топологическом случае сходимость уже не задает однозначно свойств пространства.
+\end{note}
+
+\begin{definition}
+	Пусть $X, Y$ "--- МП, $f : X \to Y$. Отображение $f$ называется \textit{непрерывным в точке} $x \in X$, если выполнено одно из следующих условий:
+	\begin{enumerate}
+		\item Для любого $\varepsilon > 0$ существует $\delta > 0$ такое, что $f\big(B(x, \delta)\big) \subset B\big(f(x), \varepsilon\big)$
+		
+		\item Для любой $\{x_n\} \subset X$ такой, что $x_n \xrightarrow[X]{} x$, выполнено $f(x_n) \xrightarrow[Y]{} f(x)$
+	\end{enumerate}
+
+	Отображение $f$ называется \textit{непрерывным}, если оно непрерывно во всех точках из $X$.
+\end{definition}
+
+\begin{note}
+    Для ТП непрерывность определяется похожим образом и согласуется с непрерывностью в МП. Пусть $X, Y$ "--- ТП, $f : X \to Y$. Отображение $f$ называется \textit{непрерывным в точке} $x \in X$, если выполнено:
+    \[\forall V(f(x)) \in \tau_Y\; \exists U(x) \in \tau_X:\; f(U(x)) \subset V(f(x)).\]
+\end{note}
+
+\begin{theorem}\label{thm1.4}
+	Пусть $X, Y$ "--- ТП, $f: X \to Y$. Тогда следующие условия эквивалентны:
+	\begin{itemize}
+		\item Отображение $f$ непрерывно
+		\item Для любого множества $G \in \tau_Y$ множество $f^{-1}(G) \in \tau_X$.
+	\end{itemize}
+\end{theorem}
+
+\begin{proof}~
+	\begin{itemize}
+        \item\imp{1}{2}Зафиксируем произвольное открытое множество $G \in \tau_Y$. Из непрерывности
+        \[\forall x \in f^{-1}(G):\; \exists U(x) \in \tau_X:\; f(U(x)) \subset G.\]
+        
+        Тогда, $f^{-1}(G) = \bigcup\limits_{x \in f^{-1}(G)}U(x)$ и каждое множество $U(x)$ является открытым, значит множество $f^{-1}(G)$ тоже является открытым.
+
+		\item\imp{2}{1}В определении непрерывности достаточно в качестве $U$ взять $f^{-1}(V) \in \tau_X$.
+	\end{itemize}
+\end{proof}
+\begin{note} \label{closed-continuous-closed}
+Можно заметить, что если прообраз любого открытого множества будет открыт, то и прообраз любого замкнутого будет замкнут.
+\end{note}
+
+\begin{definition}
+    Если отображение между МП $f:\; X \to Y$ взаимнооднозначно и взаимнонепрерывно, то есть $f^{-1}$ и $f$ непрерывны, то $f$~--- \textbf{гомеоморфизм}. Пространства $X$ и $Y$ называются гомеоморфными. 
+\end{definition}
+
+\begin{note}
+    В случае топологических пространств, гомеоморфизм это биекция между $X$ и $Y$, а также между топологиями на них.
+\end{note}
+
+\begin{definition}
+    Если гомеоморфизм $f$ сохраняет расстояния:
+    \[
+    \rho(x_1, x_2) = \rho'(f(x_1), f(x_2)),
+    \]
+    то он называется \textbf{изометрией}. Пространства $X$ и $Y$ называются изометричными. 
+\end{definition}
+
+--------------------------------------------------------------------------------
+Билет 2
+
+\begin{definition}
+МП \textit{полное}, если любая фундаментальная последовательность сходится.
+\end{definition}
+
+\begin{theorem}[О вложенных шарах]\label{kantor-compact}
+    Пусть $X$ --- полное метрическое пространство, $\big\{\overline{B}_{r_n}(x_n)\big\}$ --- последовательность вложенных замкнутых шаров такая, что $r_n \to 0$. Тогда $\bigcap\limits_{n \in \N} \overline{B}_{r_n}(x_n) \neq \varnothing$. Более того, $\bigcap\limits_{n \in \N} \overline B_{r_n}(x_n) = \{x^*\}$ для некоторой точки $x^* \in X$.
+\end{theorem}
+\begin{proof}
+    В силу вложенности шаров и условия $r_n \to 0$, последовательность $\{x_n\}$ фундаментальна. Тогда, поскольку пространство $X$ полно, для некоторого $x^* \in X$ выполнено $x_n \to x^*$. Но каждый шар $\overline B_{r_N}(x_N)$ содержит все точки из последовательности $\{x_n\}$, начиная с номера $N$, тогда, в силу его замкнутости, он также содержит точку $x^*$. Значит, $\bigcap\limits_{n \in \N} \overline B_{r_n}(x_n) \supset \{x^*\}$. Наконец, в силу условия $r_n \to 0$, других точек в пересечении быть не может.
+\end{proof}
+
+\begin{theorem}[Бэра]\label{Ber}
+Пусть $X$ --- полное метрическое пространство. Тогда $X$ нельзя представить в виде $X = \bigcup\limits_{n \in \N} M_n$, где множества $M_n \subset X$ --- не плотные ни в одном шаре в $X$.
+\end{theorem}
+\begin{proof}
+Предположим противное, то есть $X$ имеет такой вид, как в условии. Положим $r_0 := 1$ и выберем произвольный шар $\overline B_{r_0}(x_0) \subset X$. Поскольку $M_1$ не плотно в $B_{r_0}(x_0)$, то множество $(X \bs \overline {M_1}) \cap B_{r_0}(x_0) \neq \varnothing$, поэтому можно выбрать шар $\overline{B}_{r_1}(x_1) \subset \overline{B}_{r_0}(x_0) \setminus \overline{M_1}$. Можно считать, что $r_1 \leqslant \frac{1}{2}$. Повторяя процесс для $\overline B_{r_1}(x_1)$ и $M_2$, получим шар $\overline B_{r_2}(x_2)$ с $r_2 \leqslant \frac{1}{4}$, и так далее.
+
+Рассмотрим полученную последовательность вложенных шаров $\big\{\overline{B}_{r_n}(x_n)\big\}$. Поскольку $r_n \leqslant \frac1{2^n} \to 0$, то, по теореме \ref{kantor-compact}, для некоторой точки $x^* \in X$ выполнено равенство $\bigcap\limits_{n \in \N} \overline B_{r_n}(x_n) = \{x^*\}$. По предположению, $X = \bigcup\limits_{n \in \N_+} M_k$, поэтому $x^* \in M_n$ для некоторого $k \in \N$, но $\overline{B}_{r_k}(x_k) \cap \overline{M_k} = \varnothing$ по построению --- противоречие.
+\end{proof}
+\begin{note}[Эквивалентная формулировка теоремы Бэра]
+\label{Ber-equiv}
+Пусть $X$~--- полное метрическое пространство. Тогда если \(X = \bigcup\limits_{n \in \N}F_n\), где \(\forall n \in \N\left(F_n \text{ замкнуто} \right)\), то \(\exists n \in \N \; \exists B_\varepsilon(x_0): \; B_\varepsilon(x_0) \subseteq F_{n} \).
+\end{note}
+\begin{note}
+В формулировке выше так как \(F_n\) замкнуты, то можно взять и замкнутый шар $\overline{B}_\varepsilon(x_0)$.
+\end{note}
+
+--------------------------------------------------------------------------------
+Билет 3
+
+\begin{theorem}[О сжимающем отображении]\label{banach-compact}
+    Пусть $X$ --- полное метрическое пространство и\\\(F: X \rightarrow X\) --- сжимающее, т.е.
+    \[\exists \lambda \in (0; 1)\forall x, y \in X \left(\rho(F(x), F(y)) \leqslant \lambda \rho(x, y) \right)\]
+    Тогда \(\exists! x^* \left(F(x^*) = x^* \right)\).
+\end{theorem}
+\begin{proof} \\
+    \textit{Существование.} Зафиксируем \(x_0 \in X\) и рассмотрим последовательность \(\{x_n\}\), где \(x_{n+1} = F(x_n)\). Поскольку для \(k \in \N\) выполнено
+    \[\rho(x_{k+1}, x_k) = \rho \left(F(x_k), F(x_{k-1}) \right) \leqslant \lambda \rho(x_k, x_{k-1}) = \lambda \rho \left(F(x_{k-1}), F(x_{k-2}) \right) \leqslant ... \leqslant \lambda^k \rho \left(x_1, x_0 \right),\]
+    по неравенству треугольника получим
+    \[\rho(x_{n+p}, x_{n}) \leqslant \rho(x_{n+p}, x_{n+p-1}) + ... + \rho(x_{n+1}, x_n) \leqslant \left(\lambda^{n+p-1} + ... + \lambda^n \right) \rho(x_1, x_0) \leqslant \frac{\lambda^n}{1 - \lambda} \rho(x_1, x_0).\]
+    Так как \(\lambda^n \xrightarrow[n \rightarrow \infty]{} 0\), то \(\{x_n\}\) фундаментальна. Значит, из полноты пространства, существует\(\lim\limits_{n \rightarrow \infty}x_n = x^*\). Переходя к пределу в равенстве \(x_{n+1} = F(x_n)\) и пользуясь непрерывностью \(F\), получаем \(F(x^*)=x^*\).
+    \\
+
+    \noindent\textit{Единственность.} Предположим, что \(\exists y^*\left(F(y^*) = y^* \right)\). Тогда \(\rho(x^*, y^*) = \rho \left(F(x^*), F(y^*) \right) \leqslant \lambda \rho(x^*, y^*)\). Значит, \(\rho(x^*, y^*) = 0\) и \(x^*=y^*\).
+\end{proof}
+
+--------------------------------------------------------------------------------
+Билет 4
+
+\begin{definition}
+    Метрическое пространство $X$ называется \textit{компактным},
+    если для любой системы открытых множеств
+    $\{G_\alpha\}_{\alpha \in A} \subset 2^X$ такой,
+    что $\bigcup\limits_{\alpha \in A} G_\alpha = X$,
+    существует конечный набор $\alpha_1, \dotsc, \alpha_n \in A$ такой,
+    что $\bigcup\limits_{k = 1}^n G_{\alpha_k} = X$.
+\end{definition}
+
+\begin{note}
+    Определение выше можно сформулировать так: из любого открытого покрытия пространства $X$ можно выделить конечное подпокрытие. Или, эквивалентно, если система открытых множеств не содержит конечного покрытия пространства $X$, то она не является покрытием пространства $X$.
+\end{note}
+
+\begin{example}
+    Пространство из замкнутых ограниченых множеств $\R^n$ будет компактным
+\end{example}
+
+\begin{definition}\label{center-system}
+    Пусть $X$ "--- метрическое пространство. Система $\{B_\alpha\}_{\alpha \in A} \subset 2^X$ называется центрированной, если для любого конечного набора $\alpha_1, \dotsc, \alpha_n \in A$ выполнено $\bigcap\limits_{k = 1}^n B_{\alpha_k} \neq \varnothing$.
+\end{definition}
+
+\begin{theorem}\label{thm3.1}
+    Метрическое пространство $X$ компактно $\lra$ любая центрированная система замкнутых множеств в $X$ имеет непустое пересечение.
+\end{theorem}
+
+\begin{proof}
+    Каждой системе открытых множеств $\{G_\alpha\}_{\alpha \in A} \subset 2^X$ можно поставить в соответствие систему замкнутых множеств $\{F_\alpha\}_{\alpha \in A} := \{X \bs G_\alpha\}_{\alpha \in A}$, и наоборот. Тогда любая система открытых множеств $\{G_\alpha\}_{\alpha \in A}$, не содержащая конечного покрытия, не является покрытием $\lra$ любая центрированная система замкнутых множеств $\{F_{\alpha}\}_{\alpha \in A}$ имеет непустое пересеченеие.
+\end{proof}
+
+--------------------------------------------------------------------------------
+Билет 5
+
+\begin{definition}[$\varepsilon$-сеть]\label{varepsilon-net}
+    Пусть $M$~--- некоторое множество в метрическом пространстве $R$. Тогда множество $A$ из $R$ называется $\varepsilon$-сетью для $M$, если для любой точки $x \in M$ найдется хотя бы одна точка $a \in A$, что
+    \[\rho(x, a) \leqslant \varepsilon.\]
+\end{definition}
+
+\begin{definition}[Ограниченость]
+    Множество $M$ в метрическом пространстве $R$ называется ограниченым, если существует $B_\varepsilon(x_0)$ содержащий $M$.
+\end{definition}
+
+\begin{definition}[Вполне ограниченость, полная ограниченость]
+    Множество $M$ в метрическом пространстве $R$ называется вполне ограниченым, если для него при любом $\varepsilon > 0$ существует \textbf{конечная} \nameref{varepsilon-net}.
+\end{definition}
+
+\begin{note}
+    Если множество вполне ограничено, то его замыкагние также вполне ограничено.
+\end{note}
+
+\begin{note}
+    Из определения следует, что если само пространство вполне ограничено, то оно сепарабельно.
+\end{note}
+
+\begin{note}
+    Из вполне ограниченности следует ограниченость.
+\end{note}
+\begin{proof}
+    Из вполне ограничености ограниченость получается как объединение конечного числа ограниченных множеств.
+\end{proof}
+
+\begin{note}
+    В $n$-мерном евклидовом пространстве вполне ограниченость совпадает с обычной ограниченностью.
+\end{note}
+
+\begin{counterexample}[Из ограничености не следует вполне ограниченость]
+    Рассмотрим единичную сферу $S$ в пространстве $l_2$. Выберем точки на $S$: 
+    \begin{align*}
+    e_1 &= (1, 0, 0, \ldots),\\
+    e_2 &= (0, 1, 0, \ldots),\\
+    e_3 &= (0, 0, 1, \ldots),\\
+    \ldots
+    \end{align*}
+    Расстояние между любыми двумя отличными точками равно $\sqrt{2}$. Но тогда не существует конечной $\varepsilon$-сети при $\varepsilon < \frac{\sqrt{2}}{2}$.
+\end{counterexample}
+
+\begin{theorem}[Критерий компактности]\label{thm3.2}
+    Пусть $X$ "--- метрическое пространство. Тогда следующие условия эквивалентны:
+    \begin{enumerate}
+        \item $X$ компактно
+        \item $X$ полно и вполне ограниченно
+        \item Из любой последовательности $\{x_n\} \subset X$ можно выделить сходящуюся подпоследовательность $\{x_{n_k}\}$ т.е. $X$ - \textit{секвенциально компактно}
+        \item Любое бесконечное множество $M \subset X$ имеет предельную точку
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}~
+    \begin{itemize}
+        \item\imp{1}{2}$X$ вполне ограниченно, поскольку для любого $\varepsilon > 0$ из открытого покрытия $\{B(x, \varepsilon)\}_{x \in X}$ по определению можно выделить конечное подпокрытие. Центры шаров из подпокрытия дадут требуемую $\varepsilon$-сеть. Остается доказать полноту пространства $X$.
+
+        Пусть последовательность $\{x_n\} \subset X$ фундаментальна. Для каждого $n \in \N$ положим $A_n := \{x_n, x_{n+1}, \dotsc \}$, тогда система $\{\overline{A_n}\}$ является \hyperref[center-system]{центрированной системой замкнутых множеств}. Система центрирована потому что у любого конечного набора $\{\overline{A_n}\}_{n \in k_1, \ldots k_m}$ непустое пересечение: оно содержит хвост $\{x_{max\{k_1, \ldots k_m\}}, x_{max\{k_1, \ldots k_m\}+1}, \dotsc \}$.
+        
+        Поэтому можно выбрать точку $x_0 \in \bigcap\limits_{n \in \N_+} \overline{A_n},\; x_0 \in X$ по теореме~\ref{thm3.1}. В силу фундаментальности, для любого $\varepsilon > 0$ существует $N \in \N$ такое, что при всех $n > N$ выполнено $\overline{A_n} \subset \overline B(x_N, \varepsilon)$, откуда и $\rho(x_n, x_0) < \varepsilon$. Значит, $x_n \xrightarrow[X]{} x_0$.
+        
+        \item\imp{2}{3}Зафиксируем произвольную последовательность $\{x_n\} \subset X$. Поскольку $X$ вполне ограниченно, то для любого $\varepsilon > 0$ существует $y \in X$ такое, что шар $B(y, \varepsilon)$ содержит бесконечно много точек из $\{x_n\}$. Будем применять это рассуждение сначала для всего пространства $X$, потом для шаров в $X$, содержащих бесконечно много точек из $\{x_n\}$:
+        \begin{itemize}
+            \item[$\bullet$] Для $\varepsilon := 1$ выберем $\{x^1_k\} \subset \{x_n\}$ так, что $\{x^1_k\} \subset B(y_1, 1)$
+            \item[$\bullet$] Для $\varepsilon := \frac 12$ выберем $\{x^2_k\} \subset \{x^1_n\} \subset B(y_1, 1)$ так, что $\{x^2_k\} \subset B(y_2, \frac 12)$
+            \item[$\bullet$] Для $\varepsilon := \frac 13$ выберем $\{x^3_k\} \subset \{x^2_n\} \subset B(y_2, \frac 12)$ так, что $\{x^3_k\} \subset B(y_3, \frac 13)$, и так далее
+        \end{itemize}
+
+        Рассмотрим <<диагональную>> последовательность $\{x_k^k\} \subset \{x_n\}$. По построению, она является фундаментальной, и в силу полноты пространства $X$ она сходится.
+        
+        \item\imp{3}{1}Проверим сначала, что $X$ вполне ограниченно. Предположим противное, то есть существует $\varepsilon_0 > 0$ такое, что никакой конечный набор шаров радиуса $\varepsilon_0$ не покрывает $X$. Тогда можно выбрать точку $x_1 \in X$, затем точку $x_2 \in \big(X \bs B(x_1, \varepsilon_0)\big)$, точку $x_3 \in \big(X \bs (B(x_1, \varepsilon_0) \cup B(x_2, \varepsilon_0))\big)$, и так далее. Процесс не закончится, и будет получена последовательность $\{x_n\}$ с попарными расстояниями между точками не меньше $\varepsilon_0$, из которой нельзя выделить сходящуюся подпоследовательность, --- противоречие. Значит, $X$ вполне ограниченно.
+        
+        Теперь проверим, что $X$ компактно. Предположим противное, то есть существует открытое покрытие $\{G_\alpha\}_{\alpha \in \mf A}$, не имеющее конечного подпокрытия. Значит, для любого $\varepsilon > 0$ найдется $x \in X$ такое, что шар $B(x, \varepsilon)$ не покрывается конечным числом множеств из $\{G_\alpha\}$ (если такого шара нет, то из вполне ограниченности, складывая конечные покрытия конечного числа шаров, получим конечное покрытие всего множества). Выбирая такую точку $x_n$ для $\varepsilon := \frac 1n$ при каждом $n \in \N$, получим последовательность $\{x_n\}$, из которой можно выделить сходящуюся подпоследовательность $\{x_{n_k}\}$. Пусть $x_{n_k} \xrightarrow[X]{} x_0 \in X$, где $x_0 \in X$. Тогда существует $\alpha_0 \in \mf A$ такое, что $x_0 \in G_{\alpha_0}$. Но множество $G_{\alpha_0}$ открыто, поэтому оно покрывает некоторую окрестность точки $x_0$, а значит и все шары $B(x_{n_k}, \frac1{n_k})$, начиная с некоторого номера, --- противоречие.
+        
+        \item\imp{3}{4}Зафиксируем бесконечное множество $M \subset X$, тогда, выбирая произвольным образом последовательность $\{x_n\} \subset M$ и выделяя из нее сходящуюся подпоследовательность, получим требуемое.
+        
+        \item\imp{4}{3}Зафиксируем последовательность $\{x_n\}$. Если множество ее значений конечно, то в ней можно выделить стационарную подпоследовательность. Если же множество ее значений бесконечно, то оно имеет предельную точку $x_0 \in X$, поэтому можно выбрать подпоследовательность $\{x_{n_k}\}$ такую, что $x_{n_k} \xrightarrow[X]{} x_0$.\qedhere
+    \end{itemize}
+\end{proof}
+
+\begin{note}
+    Условию компактности пространства $X$ также эквивалентно такое условие: любая непрерывная функция $f : X \to \R$ является ограниченной на $X$, то есть выполнено включение $C(X, \R) \subset B(X, \R)$.
+\end{note}
+
+\begin{theorem}[Кантора]\label{thm3.3}
+    Пусть $X$ "--- компактное МП, и функция $f: X \to \R$ непрерывна на $X$. Тогда $f$ равномерно непрерывна на $X$.
+\end{theorem}
+
+\begin{proof}
+    Предположим противное, то есть выполнено следующее:
+    \[\exists \varepsilon_0 > 0: \forall \delta > 0: \exists x, y \in X, \rho(x, y) < \delta: |f(x) - f(y)| \geqslant \varepsilon_0\]
+
+    Выбирая $\delta := \frac 1n$ для каждого $n \in \N$, получим последовательности $\{x_n\}$ и $\{y_n\}$. Поскольку $X$ компактно, можно выделить из них сходящуюся подпоследовательности $\{x_{n_k}\}$ и $\{y_{n_k}\}$, причем сходятся они к одной и той же точке $x_0 \in X$ по построению, однако для любого $k \in \N$ выполнено $|f(x_{n_k}) - f(y_{n_k})| \geqslant \varepsilon_0$ --- противоречие.
+\end{proof}
+
+\begin{definition}
+    Пусть $X$ "--- метрическое пространство. Множество $M \subset X$ называется \textit{предкомпактом}, если множество $\overline M$ компактно как подпространство в $X$.
+\end{definition}
+
+\begin{note}
+    Пусть $M \subset X$. Нетрудно проверить, что справедливы следующие утверждения:
+    \begin{itemize}
+        \item Если множество $M$ вполне ограниченно как подмножество в $X$, то оно также вполне ограниченно как пространство, то есть конечную $\varepsilon$-сеть можно выбирать не в объемлющем пространстве $X$, а в самом пространстве $M$. Обратное, очевидно, тоже верно.
+        
+        \item Если замыкание $\overline M$ множества $M$ вполне ограниченно, то множество $M$ тоже вполне ограниченно.
+        
+        \item Если пространство $X$ полно, то условия полноты и замкнутости множества $M$ эквивалентны.
+    \end{itemize}
+
+    Из \hyperref[thm3.2]{критерия компактности} и утверждений выше следует, что в полном метрическом пространстве свойства предкомпактности и вполне ограниченности эквивалентны.
+\end{note}
+
+--------------------------------------------------------------------------------
+Билет 6
+
+\begin{definition}
+    Обозначим за $C(X, Y)$ множество непрерывных функций $f: X \to Y$.
+\end{definition}
+
+\begin{theorem}[Арцела---Асколи]
+    Пусть $X$ "--- компактное метрическое пространство, $M \subset C(X, \R)$. Тогда множество $M$ вполне ограниченно $\lra$ множество $M$ ограниченно и выполнено условие равностепенной непрерывности:
+    \[
+        \forall \varepsilon > 0: \exists \delta > 0: \forall x, y \in X, \rho(x, y) < \delta: \forall f \in M: |f(x) - f(y)| < \varepsilon 
+    \]
+\end{theorem}
+
+\begin{proof}[Доказательство для случая, когда {$X = [a, b]$}]~
+    \begin{itemize}
+        \item[$\ra$] Ограниченность множеств $M$ очевидна, проверим условие равностепенной непрерывности. Зафиксируем произвольное $\varepsilon > 0$ и выберем конечный набор функций $\varphi_1, \dotsc, \varphi_n \in C(X, \R)$, образующий $\varepsilon$-сеть. По теореме \ref{thm3.3}, каждая из этих функций равномерно непрерывна. Пусть $\delta_1, \dotsc, \delta_n > 0$ "--- числа, соответствующие выбранному $\varepsilon$ в определении равномерной непрерывности. 
+        \[\forall \varepsilon > 0 \exists \delta_k > 0 \: (\rho(x, y) < \delta_k \Rightarrow |\varphi_k(x)-\varphi_k(y)|<\varepsilon)\]
+        Тогда для $\delta := \min \{\delta_1, \dotsc, \delta_n\}$ выполнено требуемое.
+        \[|f(x)-f(y)|\leqslant |f(x) - \varphi_k (x)| + |\varphi_k (x) - \varphi_k (y)| + |\varphi_k (y) - f (y)| < 3 \varepsilon\]
+        
+        \item[$\la$] Поскольку множество $M$ ограниченно, то существует $C > 0$ такое, что для любой функции $f \in M$ выполнено условие $||f(x)||=\sup\limits_{x \in [a, b]}|f(x)| \leqslant C$. Зафиксируем произвольное $\varepsilon > 0$ и выберем по нему $\delta > 0$ из условия равностепенной непрерывности. 
+        
+        Разобьем отрезок $[a, b]$ на части длины меньше $\delta$ точками $a = x_0 < x_1 < \dotsb < x_n = b$, отрезок $[-C, C]$ --- на части длины меньше $\varepsilon$ точками $-C = y_0 < y_1 < \dotsb < y_m = C$, и рассмотрим конечное множество $L$ кусочно-линейных функций, построенных по всевозможным наборам точек вида $\{(x_0, y_{i_i}), \dotsc, (x_n, y_{i_n})\}$, $i_0, \dotsc, i_n \in \{0, \dotsc, m\}$.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.4\textwidth]{images/eps-net.png}
+        \end{figure}
+        Для любой функции $f \in M$ можно выбрать ломаную $\varphi \in L$ такую, что для всех $i \in \{0, \dotsc, n\}$ выполнено $|f(x_i) - \varphi(x_i)| < \varepsilon$. Рассмотрим произвольную точку $x \in [a, b]$ и выберем $i \in \{0, \dotsc, n - 1\}$ такое, что $x \in [x_i, x_{i + 1}]$, тогда:
+        \[
+            |f(x) - \varphi(x)| \leqslant |f(x) - f(x_i)| + |f(x_i) - \varphi(x_i)| + |\varphi(x) - \varphi(x_i)| <  2\varepsilon + |\varphi(x_{i+1}) - \varphi(x_i)|
+        \]
+
+        Первое слагаемое меньше $\varepsilon$ из равностепенной непрерывности, а второе по построению $\varphi$. Оценим слагаемое $|\varphi(x_{i+1}) - \varphi(x_i)|$ отдельно:
+        \[|\varphi(x_{i+1}) - \varphi(x_i)| \leqslant |f(x_{i+1}) - \varphi(x_{i+1})| + |f(x_{i+1}) - f(x_i)| + |f(x_i) - \varphi(x_i)| < 3\varepsilon\]
+
+        Таким образом, $\sup\limits_{x \in [a, b]}|f(x) - \varphi(x)| < 5\varepsilon$. Значит, построенное множество $L$ образует конечную $5\varepsilon$-сеть для множества $M$, тогда, в силу произвольности выбора числа $\varepsilon$, множество $M$ вполне ограниченно.\qedhere
+    \end{itemize}
+\end{proof}
+
+--------------------------------------------------------------------------------
+Билет 7
+
+\label{seventh-bilet}
+\begin{definition}
+	\textit{Линейным нормированным пространством} над полем $\Kk$, где $\Kk = \R$ или $\Kk = \Cm$, называется линейное пространство $E$ над $\Kk$ с функцией $\|\cdot\| : E \to \R$, обладающей следующими свойствами:
+	\begin{enumerate}
+		\item $\forall x \in E: \|x\| \geqslant 0$, причем $\|x\| = 0 \lra x = 0$
+		\item $\forall x \in E: \forall \alpha \in \Kk: \|\alpha x\| = |\alpha|\|x\|$
+		\item $\forall x, y \in E: \|x + y\| \leqslant \|x\| + \|y\|$ (\textit{неравенство треугольника})
+	\end{enumerate}
+
+	Функция $\|\cdot\|$ называется \textit{нормой} на пространстве $E$.
+\end{definition}
+
+\begin{example}
+    Легко видеть, что любое линейное нормированное пространство $E$ является метрическим с метрикой, заданной для произвольных $x, y \in E$ как $\rho(x, y) := \|x - y\|$. Приведенные ранее в качестве примеров метрические пространства являются линейными нормированными, и метрика в них имеет вид нормы разности элементов.
+\end{example}
+
+\begin{note}
+	Норма непрерывна как функция $E \to \R$. Если для последовательности $\{x_n\} \subset E$ выполнено $x_n \xrightarrow[E]{} x$, то $\rho(x_n, x) = \|x_n - x\| \to 0$. Дважды воспользуемся неравенством треугольника:
+	\begin{itemize}
+		\item $\|x_n\| \leqslant \|x_n - x\| + \|x\|$
+		\item $\|x\| \leqslant \|x_n - x\| + \|x_n\|$
+	\end{itemize}
+
+	Таким образом, $\left|\|x_n\| - \|x\|\right| \to 0$, то есть $\|x_n\| \to \|x\|$, что и требовалось.
+\end{note}
+
+\begin{definition}
+	Пусть $E$ "--- линейное нормированное пространство. Множество $L \subset E$ называется:
+	\begin{itemize}
+		\item \textit{Линейным многообразием} в $E$, если $L$ замкнуто относительно сложения и умножения на скаляры из $\mathbb{K}$
+  		\item \textit{Подпространством} в $E$, если $L$ является линейным многообразием в $E$ и при этом замкнуто 
+	\end{itemize}
+\end{definition}
+
+\begin{definition}
+	Пусть $E$ "--- линейное нормированное пространство, $M \subset E$. \textit{Линейной оболочкой} множества $M$ называется множество следующего вида:
+	\[[M] := \left\{\sum_{k = 1}^n \alpha_im_i : \alpha_1, \dotsc \alpha_n \in \Kk, m_1, \dotsc, m_n \in M\right\}\]
+\end{definition}
+
+\begin{note}
+	Линейная оболочка множества всегда является линейным многообразием в $E$, но не всегда является подпространством.
+\end{note}
+
+\begin{example}
+    Пусть $E = C[0,1]$ и $M$ -- многочлены в $E$. Тогда $M = [M]$ является многообразием, но не является подпространством, так как линейной комбинацией многочленов можно представить только многочлен, но не все непрерывные функции.
+    
+    По теореме Вейерштрасса о приближении непрерывной функции многочленами, получается, что $[M]$ не содержит все свои точки прикосновения, а значит не замкнуто и не является подпространством.
+\end{example}
+
+\begin{definition}
+	Пусть $E$ "--- линейное пространство. Нормы $\|\cdot\|$ и $\|\cdot\|'$ на $E$ называются \textit{эквивалентными}, если существуют числа $C_1, C_2 > 0$ такие, что для любого $x \in E$ выполнены неравенства:
+	\[C_1\|x\|' < \|x\| < C_2\|x\|'\]
+\end{definition}
+
+\begin{note}
+	Если нормы $\|\cdot\|$ и $\|\cdot\|'$ эквивалентны, то последовательность $\{x_n\} \subset E$ сходится или расходится относительно обеих норм одновременно.
+\end{note}
+
+\begin{definition}
+	Пусть $E$ "--- линейное пространство. \textit{Размерностью} пространства $E$ называется наибольший размер линейно независимой системы в $E$. Обозначение "--- $\dim E$.
+\end{definition}
+
+\begin{proposition}[лемма о <<почти перпендикуляре>>]\label{almostperp}
+	Пусть $E$ "--- линейное нормированное пространство, $L \subsetneq E$ "--- подпространство. Тогда для любого $\varepsilon > 0$ существует $y \in E$ такой, что $\|y\| = 1$ и $\rho(y, L) = \inf\limits_{z \in L}\|y - z\| \geqslant 1 - \varepsilon$.
+\end{proposition}
+
+\begin{proof}
+		Зафиксируем $y_0 \in E \bs L$ положим $d := \rho(y_0, L) > 0$. Выберем вектор $z_0 \in L$ такой, что $d \leqslant \|y_0 - z_0\| \leqslant d(1 + \varepsilon)$ и покажем, что подходит вектор $y := \frac{y_0 - z_0}{\|y_0 - z_0\|}:= \alpha (y_0-z_0)$. Действительно, $\|y\| = 1$, и для любого $z \in L$ выполнены неравенства:
+		\[\|y - z\| = \big\|\alpha(y_0 - z_0) - z\big\|=|\alpha| \big\| y_0 - \underbrace{\left(z_0 + \frac1{\alpha} z\right)}_{\in L} \big\| \geqslant |\alpha|d \geqslant \frac{\alpha}{\alpha(1+\varepsilon)} \geqslant 1 - \varepsilon\]
+
+		Значит $\inf\limits_{z \in L}\|y - z\| \geqslant 1 - \varepsilon$. Получено требуемое.
+\end{proof}
+
+\begin{theorem}[Рисса]\label{thm4.1}
+	Пусть $E$ "--- линейное нормированное пространство. Тогда единичная сфера $S(0, 1)$ компактна в $E$ $\lra$ $\dim E < +\infty$.
+\end{theorem}
+
+\begin{proof}~
+	\begin{itemize}
+		\item[$\la$] По \hyperref[normequiv]{эквивалентности норм в конечномерных пространствах}, все нормы на конечномерном линейном пространстве эквивалентны, а относительно евклидовой нормы сфера $S(0, 1)$ компактна.
+  
+  		\item[$\ra$] От противного. Зафиксируем $\varepsilon > 0$ и построим последовательность $\{x_n\} \subset S(0, 1)$ с попарными расстояниями не меньше $1 - \varepsilon$, из чего будет следовать, что сфера $S(0, 1)$ не вполне ограниченна и потому не компактна:
+		\begin{itemize}
+			\item[$\bullet$] Выберем $x_1 \in S(0, 1)$ произвольным образом
+			\item[$\bullet$] По \hyperref[almostperp]{лемме о почти перпендикуляре} выберем $x_2 \in S(0, 1) \bs [x_1]$ такое, что $\rho(x_2, [x_1]) \geqslant 1- \varepsilon$, причем утверждение применимо так как линйеная оболочка конечномерна и по~\ref{closeness-subspace} она замкнута, а значит действительно подпространство.
+			\item[$\bullet$] По \hyperref[almostperp]{лемме о почти перпендикуляре} выберем $x_3 \in S(0, 1) \bs [x_1, x_2]$ такое, что $\rho(x_3, [x_1, x_2]) \geqslant 1- \varepsilon$
+		\end{itemize}
+
+		Поскольку $\dim E = + \infty$, то процесс не закончится, и будет получена искомая последовательность $\{x_n\}$.\qedhere
+	\end{itemize}
+\end{proof}
+
+--------------------------------------------------------------------------------
+Билет 8
+
+\begin{definition}
+	\textit{Евклидовым пространством} над полем $\mathbb{K}$( где $\mathbb{K} = \R$ или $\mathbb{K} = \C$), называется линейное пространство $E$ над \ $\mathbb{K}$ \ с функцией $(\cdot, \cdot) : E^2 \to \mathbb{K}$, обладающей следующими свойствами:
+	\begin{enumerate}
+		\item $\forall x \in E: (x, x) \geqslant 0$, причем $(x, x) = 0 \lra x = 0$
+		\item $\forall x, y \in E: (x, y) = \overline{(y, x)}$
+		\item $\forall x, y, z \in E: \forall \alpha, \beta \in \mathbb{K} (\alpha x + \beta y, z) = \alpha(x, z) + \beta(y, z)$
+	\end{enumerate}
+
+	Функция $(\cdot, \cdot)$ называется \textit{скалярным произведением} на пространстве $E$.
+\end{definition}
+
+\begin{example}
+	Легко видеть, что любое евклидово пространство $E$ является линейным нормированным с нормой, заданной для произвольного $x \in E$ как $\|x\| := \sqrt{(x, x)}$. Некоторые из приведенных ранее в качестве примеров метрических пространств являются не только линейными нормированными, но и евклидовыми, и норма в них порождается скалярным произведением:
+	\begin{enumerate}
+		\item Скалярное произведение на $\R^n_2$ задается для произвольных $x, y \in \R^n$ следующим образом:
+  		\[(x, y) := \sum_{k = 1}^n x_ky_k\]
+
+		\item Скалярное произведение на $l_2$ задается для произвольных $x, y \in l_2$ следующим образом:
+		\[(x, y) := \sum_{n = 1}^\infty x_ny_n\]
+
+		\item Скалярное произведение на $L_2[a, b]$ задается для произвольных $f, g \in L_2[a, b]$ следующим образом:
+		\[(f, g) := \int_a^b f(x)g(x)dx\]
+	\end{enumerate}
+\end{example}
+
+\begin{theorem}[Характеристическое свойство Евклидовых пространств (б/д)]
+	Пусть $E$ "--- линейное нормированное пространство. Тогда норма в $E$ порождается скалярным произведением $\lra$ для любых $x, y \in E$ выполнено равенство параллелограмма:
+	\[\|x+y\|^2 + \|x-y\|^2 = 2\|x\|^2 + 2\|y\|^2\]
+\end{theorem}
+
+\begin{definition}~ Полное линейное нормированное пространство $E$ называется \textit{банаховым}.
+\end{definition}
+
+\begin{definition}~ Полное евклидово пространство $H$ называется \textit{гильбертовым}.
+\end{definition}
+
+\begin{corollary}[неравенство Коши---Буняковского]
+	Пусть $E$ "--- евклидово пространство. Тогда для любых $x, y \in E$ выполнено следующее неравенство:
+	\[|(x, y)| \leqslant \|x\| \cdot \|y\|\]
+\end{corollary}
+
+\begin{proof}
+$e = \frac{y}{\|y\|}$ - единичный вектор
+ $$0 \leqslant \|x - (x,e)e\|^2 = \|x\|^2 - \overline{(x,e)}(x,e) - (x,e)(e,x) + |(x,e)|^2 = \|x\|^2 - |(x,e)|^2$$
+ $$|(x,e)| \leqslant \|x\|$$
+ $$|(x,e)|\cdot\|y\| = |(x,y)| \leqslant \|x\| \cdot \|y\|$$
+\end{proof}
+
+\begin{note}
+	Из неравенства Коши-Буняковского, в частности, следует, что скалярное произведение непрерывно на $E$ относительно порождаемой им нормы.
+\end{note}
+
+--------------------------------------------------------------------------------
+Билет 9
+
+\begin{definition}
+    Непустое множество L называется \textit{линейным пространством}, если оно удовлетворяет таким условиям
+    \begin{enumerate}
+        \item Для любых $x, y \in L$ однозначно определен третий элемент $z \in L$, называемый их суммой, причем \begin{enumerate}
+            \item $x + y = y + x$
+            \item $x + (y + z) = (x + y) + z$
+            \item $\exists 0 \in L \; \forall x \in L:\; x + 0 = x$
+            \item $\forall x \in L \; \exists (-x) \in L:\; x + (-x) = 0$
+        \end{enumerate}
+        \item Для любого числа $\alpha$ и любого элемента $x \in L$ определен элемент $\alpha x \in L$, называемый произведением, причем
+        \begin{enumerate}
+            \item $\alpha (\beta x) = (\alpha \beta) x$
+            \item $1 \cdot x = x$
+            \item $(\alpha + \beta) x = \alpha x + \beta x$
+            \item $\alpha (x + y) = \alpha x + \alpha y$
+        \end{enumerate}
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Линейные пространства $L$ и $L^*$ называются \textbf{изоморфными}, если между их элементами можно установить взаимно однозначное соответствие $f$, которое согласуется с операциями в $L$ и $L^*$:
+    \[
+    \forall x, y \in L,\; \forall x^*, y^* \in L^*,\; x \xleftrightarrow[f]{} x^*,  y \xleftrightarrow[f]{} y^* \implies x + y \xleftrightarrow[f]{} x^* + y^*, \alpha x  \xleftrightarrow[f]{} \alpha x^*
+    \]
+\end{definition}
+
+\begin{definition}
+    Евклидовы пространства $E$ и $E^*$ называются \textbf{изоморфными}, если они изоморфны как линейные пространства и при этом сохраняется скалярное произведение:
+     \[
+    \forall x, y \in E,\; \forall x^*, y^* \in E^*,\; x \xleftrightarrow[f]{} x^*,  y \xleftrightarrow[f]{} y^* \implies (x, y) = (x^*, y^*).
+    \]
+\end{definition}
+
+\begin{note}
+    Смежные опеределения сформулированы в пункте~\nameref{seventh-bilet}.
+\end{note}
+
+\begin{example}
+    Определим пространство $X = \{u \in C^1[0, 1] : u(0) = 0\}$.\\
+    
+    Введем нормы $||u||_1 = (\int_0^1(u(x)^2 + u'(x)^2)dx)^{\frac{1}{2}}, ||u||_2 = (\int_0^1u'(x)^2dx)^{\frac{1}{2}}$. Докажем, что нормы эквивалентны. Ясно, что $||u||_2 \leqslant ||u||_1$, поэтому достаточно доказать противоположное неравенство.
+
+    В силу условия $u(0) = 0$ справедливо равенство $$u(x) = \int_0^xu'(t)dt \quad \forall x \in [0, 1]$$
+
+    Возведем обе части равенства в квадрат и воспользуемся неравенством Коши-Буняковского: $$u^2(x) = \left(\int_0^xu'(t)dt \right)^2 \leqslant \int_0^xdt \cdot \int_0^x u'(t)^2dt \leqslant x \int_0^1u'(t)^2dt \leqslant \int_0^1u'(t)^2dt \quad \forall x \in [0, 1]$$
+
+    Отсюда легко вывести два следующих неравенства:
+    $$\left(\int_0^1u^2(x)dx\right)^{\frac{1}{2}} \leqslant \left(\int_0^1 u'(x)^2dx\right)^{\frac{1}{2}} \quad \forall u \in X$$
+    $$\underset{0 \leqslant x \leqslant 1}{max}|u(x)| \leqslant \left(\int_0^1 u'(x)^2dx\right)^{\frac{1}{2}} \quad \forall u \in X$$
+
+    Из предпоследнего следует, что $||u||_1 \leqslant \sqrt{2}||u||_2$.
+\end{example}
+
+\begin{example}
+    Теперь пример не эквивалентных норм.
+    Рассмотрим множество непрерывных функций на $[a, b]$ и нормы $||x||_C = \underset{a\leqslant t\leqslant b}{max}|x(t)|, ||x||_1 = \int_a^b|x(t)|dt$. Докажем, что они не эквивалентны. На самом деле, в одну сторону нужное неравенство даже работает -- $||\cdot||_C$ сильнее, чем $||\cdot||_1$. А вот в обратную сторону не получается. 
+    
+    Для доказательства этого построим последовательность функций $x_n$, которые возрастают линейно от $0$ до $2n$ на отрезке $[a, a+\frac{1}{2n}]$, убывают линейно от $2n$ до $0$ на отрезке $[a+\frac{1}{2n}, a+\frac{1}{n}]$ и равны нулю в остальных точках отрезка. Тогда $||x||_1 = 1, ||x||_C = n \to \infty$. Поэтому не существует такой константы $K$, для которой было бы верно 
+    $$||x_n||_C \leqslant K \cdot \int_a^b|x_n(t)|dt$$
+\end{example}
+
+\begin{proposition}\label{normequiv}
+	Пусть $E$ "--- линейное нормированное пространство, и $\dim E < +\infty$. Тогда любые две нормы на $E$ эквивалентны.
+\end{proposition}
+
+\begin{proof}(Доказательство для случая, когда {$\Kk = \R$})
+	Поскольку $E$ конечномерно, то в нем можно выбрать максимальную по включению линейно независимую систему $e = \{e_1, \dotsc, e_n\} \subset E$, тогда $e$ будет являться базисом в $E$. Для произвольного элемента $x \in E$, имеющего в базисе $e$ координатный столбец $\alpha \in \R^n$, зададим его \textit{евклидову норму} следующим образом:
+	\[\|x\|_{euc} := \sqrt{\sum_{k = 1}^n \alpha_k^2}\]
+
+	\noindentЗафиксируем произвольную норму $\|\cdot\|$ и докажем, что она эквивалентна норме $\|\cdot\|_{euc}$
+	\begin{enumerate}
+		\item Покажем, что $\|\cdot\| < C \|\cdot\|_{euc}$ для некоторого $C > 0$. Для произвольного $x \in E$, имеющего в базисе $e$ координатный столбец $\alpha \in \R^n$, выполнено следующее:
+		\[\|x\| = \left\|\sum_{k = 1}^n\alpha_k e_k \right\| \leqslant \max_{1 \leqslant k \leqslant n}\|e_k\|\left(\sum_{k = 1}^n|\alpha_k|\right)\]
+  
+		Поскольку для любого $k \in \{1, \dotsc, n\}$ выполнено $|\alpha_k| < \|x\|_{euc}$, то достаточно взять число $C := n(\max_{1 \leqslant k \leqslant n}\|e_k\|)$.
+
+		\item Покажем теперь, что $\|\cdot\|_{euc} < \widetilde C \|\cdot\|$ для некоторого $\widetilde C > 0$. Предположим противное, тогда для любого $n \in \N$ существует $x_n \in E$ такое, что $\|x_n\|_{euc} > n\|x_n\|$. Можно без ограничения общности считать, что $\|x_n\|_{euc} = 1$ для любого $n \in \N$, откуда $\|x_n\| < \frac 1n$.
+		
+		Поскольку последовательность $\{x_n\}$ содержится в единичной сфере $S_{euc}(0, 1)$ и относительно евклидовой нормы сфера компактна, можно выделить из $\{x_n\}$ подпоследовательность $\{x_{n_k}\}$, сходящуюся относительно евклидовой нормы. Тогда $\|x_{n_k} - x\|_{euc} \to 0$ для некоторого $x \in S_{euc}(0, 1)$, тогда, в силу пункта $(1)$, $\|x_{n_k} - x\| \to 0$. Но по построению $\|x_{n_k}\| < \frac 1{n_k}\to 0$, поэтому $x = 0$ --- противоречие с тем, что $x \in S_{euc}(0, 1)$.\qedhere
+	\end{enumerate}
+\end{proof}
+
+\begin{corollary}\label{closeness-subspace}
+	Пусть $E$ "--- линейное нормированное пространство, $x_1, \dotsc, x_n \in E$. Тогда линейная оболочка $L := [x_1, \dotsc, x_n]$ образует подпространство в $E$.
+\end{corollary}
+
+\begin{proof}
+	Заметим, что $\dim L < +\infty$, и по утверждению \ref{normequiv} сужение нормы из $E$ на $L$ эквивалентно евклидовой норме. Относительно евклидовой нормы конечномерное пространство полно, поэтому и $L$ полно относительно нормы из $E$. Следовательно, $L$ замкнуто как подмножество в $E$.
+\end{proof}
+
+\begin{definition}
+	\textit{Линейным топологическим пространством} называется топологическое пространство $X$ с определенными на нем операциями сложения и умножения на числа из поля $\K$, непрерывными на $X$.
+\end{definition}
+
+\begin{example}
+	Любое линейное нормированное пространство $E$ является линейным топологическим, как и пространство основных функций $D$, которое при этом даже не является метризуемым.
+\end{example}
+
+--------------------------------------------------------------------------------
+Билет 10
+
+\begin{definition}
+	Пусть $E$ "--- линейное нормированное пространство, $L \subset E$ "--- линейное нормированное подпространство, $h \in E$. \textit{Элементом наилучшего приближения} для $h$ называется $x \in L$ такой, что 
+    $\|h - x\| = \rho(h, L) = \inf \limits_{y \in L} \|h - y\|$.
+\end{definition}
+
+\begin{note}
+	Можно построить примеры, в которых элемент наилучшего приближения не существует или не единственен.
+\end{note}
+
+\begin{example}
+Рассмотрим $\R^2_{\infty}$, $\|x\| = \max(|x_1|, |x_2|)$.
+Пусть $L = \{x : x_2 = 0\}$, $x = (1, 1)$. Так как открытый шар 
+в $\R^2_{\infty}$ выглядит как квадрат, то открытый шар
+с центром в $x$ коснётся $L$ сразу во многих точках
+(а именно, в $\{ (x_1, 0) : 0 \leqslant x_1 \leqslant 2 \})$.
+\end{example}
+
+\begin{proposition}\label{bestelt}
+	Пусть $H$ "--- гильбертово пространство, $M \subset H$ "--- подпространство в $H$. Тогда для любого $h \in H$ существует единственный элемент наилучшего приближения $x \in M$.
+\end{proposition}
+
+\begin{proof}
+	Зафиксируем $h \in H$. Сначала докажем, что элемент наилучшего приближения для $h$ существует. Положим $d := \rho(h, M)$. Если $d = 0$, то, в силу замкнутости множества $M$, выполнено $h \in M$, и в качестве элемента наилучшего приближения для $h$ подходит сам $h$. Иначе --- выберем $\{x_n\} \subset M$ такую, что $\|h - x_n\| \to d$. По равенству параллелограмма, для любых $n, m \in \N$ выполнено следующее:
+	\[\|x_n - x_m\|^2 = 2\|h - x_n\|^2 + 2\|h - x_m\|^2 - 4\left\|h - \frac{x_n + x_m}{2}\right\|^2\]
+
+	Поскольку $\|h - x_n\|^2 \to d^2$ при $n \to \infty$, $\|h - x_m\|^2 \to d^2$ при $m \to \infty$ и выполнено неравенство $\|h - \frac{x_n + x_m}{2}\|^2 \ge d^2$, последовательность $\{x_n\}$ фундаментальна. Поскольку пространство $H$ полно, а $M$ замкнуто, существует $x \in M$ такой, что $x_n \xrightarrow[H]{} x$, причем, в силу непрерывности нормы, $\|h - x\| = d$.
+
+	Покажем теперь, что элемент наилучшего приближения для $h$ единственен. Пусть для некоторого $y \in M$ тоже выполнено равенство $\|h - y\| = d$, тогда, по равенству параллелограмма, выполнено следующее $\left[h - x + h - y = 2h - x -y = 2(h - \frac{x+y}{2}), \; h - x - h + y = -(x - y)\right]$:
+	\[4d^2 = 2\|h - x\|^2 + 2\|h - y\|^2 = \|x - y\|^2 + 4\left\|h - \frac{x+y}{2}\right\|^2 \geqslant \|x - y\|^2 + 4d^2\]
+
+	Значит, $\|x - y\| = 0$, то есть $x = y$, и элемент наилучшего приближения единственен.
+\end{proof}
+
+
+\begin{definition}
+	Пусть $E$ "--- евклидово пространство, $S \subset E$. \textit{Аннулятором} множества $S$ называется следующее множество:
+	\[S^\perp := \{y \in E: \forall x \in S: (x, y) = 0\}\]
+\end{definition}
+
+\begin{note}
+	Легко проверить, что $S^\perp$ является подпространством в $E$. Кроме того, выполнены равенства $S^\perp = [S]^\perp = \overline{[S]}^\perp$.
+\end{note}
+
+\begin{theorem}[Рисса, о проекции]\label{thm4.3}
+	Пусть $H$ "--- гильбертово пространство, {$M \subset H$} -- подпространство в $H$. Тогда $H = M \oplus M^\perp$.
+\end{theorem}
+
+\begin{proof}
+	Покажем сначала, что $H = M + M^\perp$. Зафиксируем $h \in H$, и по утверждению \ref{bestelt} выберем его элемент наилучшего приближения $x \in M$. Положим $y := h - x$ и $d := \|y\|$, тогда для произвольного $m \in M$ и произвольного $\alpha \in \R \bs \{0\}$ выполнено следующее:
+	\[d^2 = \|h - x\|^2 \leqslant \|h - (x + \alpha m)\|^2 = d^2 - 2\alpha(h - x, m) + \alpha^2\|m\|^2\]
+
+	Следовательно, $(y, m) \leqslant \frac\alpha2\|m\|^2$ для любого $\alpha \in \R \bs \{0\}$, откуда $(y, m) = 0$. В силу произвольности выбора $m \in M$, получаем, что $y \in M^\perp$, причем $h = x + y$. Значит, выполнено равенство $H = M + M^\perp$. Проверим теперь, что сумма $M + M^\perp$ --- прямая. Действительно, если $z \in M \cap M^\perp$, то $(z, z) = 0$, откуда $z = 0$, что и означает требуемое.
+\end{proof}
+
+\begin{note}
+	Теорема выше отражает одно из важных свойств гильбертовых пространств, которое для банаховых пространств верно не всегда. Далее мы обсудим еще одно такое свойство --- существование базиса в бесконечномерном сепарабельном пространстве.
+\end{note}
+
+--------------------------------------------------------------------------------
+Билет 11
+
+\begin{definition}
+	Пусть $E$ "--- линейное нормированное пространство. Система $\{e_n\} \subset E$ называется \textit{базисом (Шаудера)} в $E$, если для любого $x \in E$ существует единственный набор чисел $\{\alpha_n\} \subset \K$ такой, что 
+    $x = \sum \limits_{n = 1}^{\infty} \alpha_n e_n$.
+\end{definition}
+
+\begin{proposition}[неравенство Бесселя]
+	Пусть $E$ "--- евклидово пространство, элементы 
+    $\{e_i\}$ из $E$ образуют ортонормированную
+    систему. Тогда для любого $x \in E$ выполнено следующее
+    неравенство:
+	\[\sum_{k = 1}^{\infty}|(x, e_k)|^2 \leqslant \|x\|^2\]
+\end{proposition}
+
+\begin{proof}
+	Достаточно заметить, что в силу ортнормированности системы $\{e_k\}$ выполнено следующее равенство:
+	\[ 0 \leqslant \left\|x - \sum_{k = 1}^n(x, e_k)e_k\right\|^2 = 
+ \|x\|^2 - \sum_{k = 1}^{n}|(x, e_k)|^2\]
+
+	Поскольку левая часть равенства выше неотрицательна, то неотрицательна и правая часть, и верно это для произвольного $n \geqslant 1$ из чего следует требуемое.
+\end{proof}
+
+\begin{corollary}[неравенство Коши---Буняковского]
+	Пусть $E$ "--- евклидово пространство. Тогда для любых $x, y \in E$ выполнено следующее неравенство:
+	\[|(x, y)| \leqslant \|x\| \cdot \|y\|\]
+\end{corollary}
+
+\begin{proof}
+	Случай, когда $y = 0$, тривиален, поэтому можно считать, что $y \neq 0$. Тогда система $\left\{\frac{y}{\|y\|}\right\}$ является ортонормированной, и по неравенству Бесселя выполнено следующее:
+	\[\left|\left(x, \frac y{\|y\|}\right)\right|^2 \leqslant \|x\|^2 \ra |(x, y)| \leqslant \|x\| \cdot \|y\| \qedhere\]
+\end{proof}
+
+\begin{note}
+	Из неравенства Коши-Буняковского, в частности, следует, что скалярное произведение непрерывно на $E$ относительно порождаемой им нормы.
+\end{note}
+
+\begin{proposition}\label{minproperty}
+	Пусть $E$ "--- евклидово пространство, элементы $e_1, \dotsc, e_k \in E$ образуют ортонормированную систему. Тогда для любого $x \in E$ и любого набора $\{\alpha_k\}_{k = 1}^n \subset \K$ выполнено следующее неравенство:
+	\[\left\|x - \sum_{k = 1}^n \alpha_ke_k\right\| \geqslant \left\|x - \sum_{k = 1}^n (x, e_k)e_k\right\|\]
+
+	Более того, равенство в неравенстве выше достигается тогда и только тогда, когда $\alpha_k = (x, e_k)$ для всех $k \in \{1, \dotsc, n\}$.
+\end{proposition}
+
+\begin{proof}[Доказательство для случая, когда {$\K = \R$}]
+	В силу ортонормированности системы $\{e_k\}_{k = 1}^n$, выполнены следующие равенства:
+	\begin{multline*}
+		\left\|x - \sum_{k = 1}^n \alpha_ke_k\right\|^2
+		=
+		\left(x - \sum_{k = 1}^n \alpha_ke_k, x - \sum_{k = 1}^n \alpha_ke_k\right)
+		= 
+		\\
+		=
+		\|x\|^2 - 2\sum_{k = 1}^n\alpha_k(x, e_k) + \sum_{k = 1}^n\alpha_k^2 = \left\|x - \sum_{k = 1}^n(x, e_k)e_k\right\|^2 + \sum_{k = 1}^n\big((x, e_k) - \alpha_k\big)^2
+	\end{multline*}
+
+	Из равенства между самой левой и самой правой частями в цепочке выше получаем требуемое.
+\end{proof}
+
+\begin{theorem}\label{thm4.4}
+	Пусть $H$ "--- сепарабельное гильбертово пространство, $\dim{H} = +\infty$, и ${e = \{e_n\} }$ "--- ортонормированная система. Тогда следующие условия эквивалентны:
+	\begin{enumerate}
+		\item $e$ "--- ортонормированный базис в $H$
+  		\item $\overline{[e]} = H$ т.е. $e$ -- полная система
+    	\item Для любого $h \in H$ выполнено равенство Парсеваля: $\|h\|^2 = \sum \limits_{n = 1}^\infty |(h, e_n)|^2$
+    	\item $e^\perp = \{0\}$
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}~
+	\begin{itemize}
+		\item\imp{1}{2}Очевидно из определения базиса.
+  
+		\item\imp{2}{1}Зафиксируем произвольный $h \in H$ и произвольное $\varepsilon > 0$. По условию, существует конечный набор $\alpha_1, \dotsc, \alpha_n$ такой, что $\|h - \sum_{k = 1}^n\alpha_k e_k\| < \varepsilon$. Тогда, по утверждению \ref{minproperty}, выполнено также неравенство $\|h - \sum_{k = 1}^n(h, e_k) e_k\| < \varepsilon$. Тогда, в силу произвольности числа $\varepsilon$, выполнено равенство $h = \sum_{n = 1}^\infty (h, e_n)e_n$.
+		
+		Проверим теперь, что разложение элемента $h$ единственно. Пусть для некоторого набора $\{\beta_n\} \subset \K$ выполнено равенство $h = \sum_{n = 1}^\infty \beta_n e_n$. Тогда для любого $k \in \N$, скалярно умножая частичную сумму ряда $\sum_{n = 1}^\infty\beta_n e_n$ на $e_k$ и переходя к пределу, получаем, что $\beta_k = (h, e_k)$, что и означает требуемое.
+  
+		\item\eqv{1}{3}Уже было замечено, что для любого $h \in H$ и любого $k \in \N$ выполнено следующее равенство:
+		\[\left\|h - \sum_{k = 1}^n(h, e_k)e_k\right\|^2 = \|h\|^2 - \sum_{k = 1}^n|(h, e_k)|^2\]
+		
+		Значит, $h = \sum_{n = 1}^\infty (h, e_n)e_n \lra \|h\|^2 = \sum_{n = 1}^\infty |(h, e_n)|^2$, и единственность разложения элемента $h$ доказывается так же, как в импликации выше.
+  
+		\item\eqv{2}{4}Из теоремы Рисса  и равенства $e^{\perp} = \overline{[e]}^{\perp} = M^{\perp}$ получаем требуемое. То есть \\ если система полна, то $\overline{[e]} = H \; \Rightarrow \; M^{\perp} = \{0\}$. Если $e^\perp = \{0\} \; \Rightarrow \; M = H $, то система полна. \qedhere
+	\end{itemize}
+\end{proof}
+
+\begin{corollary}
+	Пусть $H$ "--- сепарабельное гильбертово пространство. Тогда в $H$ существует не более чем счётный ортонормированный базис.
+\end{corollary}
+
+\begin{proof}
+	Случай, когда $\dim H <+\infty$, уже рассматривался в курсе алгебры, поэтому будем считать, что $\dim H = +\infty$. Рассмотрим счётное множество $F \subset H$ такое, что $\overline F = H$(оно существует по определению сепарабельности \ref{separability}), тогда $F = \{f_n\}$. Проведём процесс ортогонализации Грама--Шмидта и получим ортонормированную систему $e$, для которой выполнено $[e] = [F]$, откуда $\overline{[e]} = H$, тогда, по теореме \ref{thm4.4}, $e$ "--- ортонормированный базис в $H$.  
+\end{proof}
+
+\begin{note}
+	Результат выше позволяет построить изоморфизм между любыми двумя сепарабельными гильбертовыми пространствами бесконечной размерности: достаточно отобразить ортонормированный базис в одном пространстве в ортонормированный базис в другом пространстве.
+\end{note}
+
+
+--------------------------------------------------------------------------------
+Билет 12
+
+Пусть $E_1, E_2$ --- линейные нормированные пространства над полем $\mathbb{K}$ ($\R$ или $\C$).
+
+$A: E_1 \to E_2$ будем называть \textit{оператором}, а 
+$f: E \to \mathbb{K}$ --- функционалом.
+
+\begin{definition}
+Оператор $A$ называется \textit{ограниченным}, если для любого ограниченного $M \subset E_1$
+образ $A(M)$ ограничен в $E_2$.
+\end{definition}
+
+\begin{note}
+Ограниченность оператора не означает, что множество его значений ограничено.
+Например, тождественный оператор $I: E \to E$ является ограниченным, но множество его значений (всё $E$) неограничено.
+\end{note}
+
+\begin{note}
+Есть альтернативные определения ограниченности, которые эквивалентны для линейных операторов и доказаны в утверждении \ref{equiv-bounded-oper}. Они будут так же использоваться далее и в этом билете.
+\end{note}
+
+\begin{definition}
+Для линейных операторов можно ввести следующие определения:
+
+Образ оператора: $\im A = \{ y \in E_2 : \exists x \in E_1 \ Ax = y\}$
+
+Ядро оператора: $\ke A = \{ x \in E_1 : Ax = 0\}$
+\end{definition}
+
+\begin{note}
+$\im A$ --- линейное многообразие, но не обязательно подпространство.
+$\ke A$ --- линейное многообразие.
+\end{note}
+
+\begin{definition}
+Линейный оператор $A$ называется \textit{непрерывным}, 
+если для любой последовательности $x_n \to x$ выполнено $Ax_n \to Ax$.
+\end{definition}
+
+\begin{theorem}
+Пусть $E_1, E_2$ --- линейные нормированные пространства. $A: E_1 \to E_2$ --- линейный оператор.
+Тогда $A$ --- ограниченный тогда и только тогда, когда $A$ --- непрерывный.
+\end{theorem}
+
+\begin{proof}\\
+\textit{\imp{ограниченность}{непрерывность}}\\
+Равносильно: $x_n \to x \Leftrightarrow \|x_n - x\| \to 0$.
+\[
+\|Ax_n - Ax\|_{E_2} = \|A(x_n - x)\|_{E_2} \leqslant \|A\| \cdot \|x_n - x\|_{E_1} \to 0.
+\]
+
+\noindent\textit{\imp{непрерывность}{ограниченность}}\\
+Предположим противное, то есть $A$ не является ограниченным. 
+$\forall K\ \exists x : \|Ax\|_{E_2} > K \|x\|_{E_1}$. Пусть $K$ пробегает все натуральные числа, тогда образуется последовательность $\{x_n\}$ такая, что $\|Ax_n\|_{E_2} > n \|x_n\|_{E_1}$. Все $x_n$, очевидно, ненулевые.
+Рассмотрим последовательность $y_n = \frac{1}{n} \frac{x_n}{\|x_n\|_{E_1}} \to 0$.
+
+\[
+\|A y_n\|_{E_2} = \frac{\|A x_n\|_{E_2}}{n \cdot \|x_n\|_{E_1}} > 1\ \forall n
+\]
+
+Но из-за непрерывности оператора $A y_n \to A 0 = 0$. Противоречие.
+\end{proof}
+
+--------------------------------------------------------------------------------
+Билет 13
+
+\begin{statement}
+\label{equiv-bounded-oper}
+Если $A$ --- линейный оператор, то следующие условия эквивалентны:
+
+1) $A$ --- ограниченный;
+
+2) $\exists K : \|Ax\|_{E_2} \leqslant K \|x\|_{E_1}$;
+
+3) Образ единичного шара под действием оператора $A$ ограничен.
+\end{statement}
+
+\begin{proof}
+
+($1 \Rightarrow 2$) Если $A$ --- ограниченный, то образ любого ограниченного множества ограничен. В частности, образ единичного шара $B$ ограничен.
+То есть $\exists K : \forall x \neq 0\ 
+\left\| A \left( \frac{x}{\|x\|_{E_1}} \right) \right\|_{E_2} \leqslant K$.
+В силу линейности оператора $\exists K : \forall x \neq 0\ \|Ax\|_{E_2} \leqslant K \|x\|_{E_1}$.
+(Для $x = 0$ это выполняется автоматически).
+
+$(2 \Rightarrow 3)$
+Если $\exists K : \|Ax\|_{E_2} \leqslant K \|x\|_{E_1}$, то $\forall x : \|x\|_{E_1} = 1$ получаем, что
+$\|Ax\|_{E_2} \leqslant K$. То есть образ единичного шара ограничен.
+
+$(3 \Rightarrow 1)$
+$\exists K : \forall x, \|x\|_{E_1} = 1 \ \|Ax\|_{E_2} \leqslant K$. Пусть $M \subset E_1$ ограничено, то есть лежит в шаре радиуса $R$. Далее считаем, что $x \neq 0$ (для него это выполняется автоматически).
+Тогда \\
+$\forall x \in M\ \left\| A \left( \frac{x}{\|x\|_{E_1}} \right) \right\|_{E_2} \leqslant K$.
+Следовательно, $\forall x \in M\ \|Ax\|_{E_2} \leqslant K \|x\|_{E_1} \leqslant K \cdot R$.
+\end{proof}
+
+\begin{definition}
+\text{Нормой} линейного ограниченного оператора $A$ называется 
+$$\|A\| = \inf \{K : \forall x \ \|Ax\|_{E_2} \leqslant K \|x\|_{E_1} \}.$$
+\end{definition}
+
+\begin{statement}
+$A$ --- линейный ограниченный оператор. Тогда
+$\forall x \ \|Ax\|_{E_2} \leqslant \|A\| \cdot \|x\|_{E_1}$.
+\end{statement}
+
+\begin{proof}
+По определению $\|A\|$ существует последовательность $\{K_n\}$ такая, что
+$\|Ax\|_{E_2} \leqslant K_n \|x\|_{E_1} \ \forall x$ и $K_n \to \|A\|$. Тогда переходя к пределу в неравенстве, получаем нужное утверждение.
+\end{proof}
+
+\begin{statement}
+Пусть $A$ --- линейный ограниченный оператор. Тогда 
+\[
+\|A\| = \sup_{\|x\|_{E_1} \leqslant 1} \|Ax\|_{E_2} = \sup_{\|x\|_{E_1} = 1} \|Ax\|_{E_2} = 
+\sup_{x \neq 0} \frac{\|Ax\|_{E_2}}{\|x\|_{E_1}}
+\]
+\end{statement}
+
+\begin{proof}
+Очевидно, что 
+\[
+\|A\| \geqslant \sup_{\|x\|_{E_1} \leqslant 1} \|Ax\|_{E_2} \geqslant \sup_{\|x\|_{E_1} = 1} \|Ax\|_{E_2} \geqslant 
+\sup_{x \neq 0} \frac{\|Ax\|_{E_2}}{\|x\|_{E_1}}
+\]
+
+Осталось доказать, что $\sup\limits_{x \neq 0} \frac{\|Ax\|_{E_2}}{\|x\|_{E_1}} \geqslant \|A\|$.
+
+По утверждению выше $\|Ax\|_{E_2} \leqslant \|A\| \cdot \|x\|_{E_1}$. Но так как $\|A\|$ определена как инфинум, то
+\[
+\forall \varepsilon > 0\ \exists x_{\varepsilon} : 
+\|A x_{\varepsilon}\|_{E_2} > (\|A\| - \varepsilon) \|x_{\varepsilon}\|_{E_1}
+\]
+Получаем, что
+\[
+\sup_{x \neq 0} \frac{\|Ax\|_{E_2}}{\|x\|_{E_1}} \geqslant
+\frac{\|Ax_{\varepsilon}\|_{E_2}}{\|x_{\varepsilon}\|_{E_1}} > \|A\| - \varepsilon
+\]
+
+Это выполнено для всех $\varepsilon$, 
+а значит $\sup\limits_{x \neq 0} \frac{\|Ax\|_{E_2}}{\|x\|_{E_1}} \geqslant \|A\|$.
+\end{proof}
+
+\begin{note}
+1) Если $\dim E_1 < \infty$, то все линейные операторы ограничены. Это следует из эквивалентности норм в конечномерных пространствах.
+
+2) Если $\dim E_1 = \infty$, то существует $E_2$ и линейный \underline{неограниченный} оператор $A: E_1 \to E_2$.
+\end{note}
+
+\begin{example}
+    Существует ли линейный неограниченный оператор?
+    \begin{enumerate}
+        \item $\dim E_1 < \infty \implies$ все линейные операторы непрерывны.
+        \item $\dim E_1 = \infty$. Есть пример:\\
+        Оператор $D = \frac{d}{dx}: X \to C[0; 1]$. В качестве $X$ возьмем $C^1[0; 1]$. Если в нем выбрать норму из $C[0; 1]$, оператор не будет непрерывным, но если взять норму из $C^1[0; 1]$, то будет непрерывен.\\
+        Возьмем $f_n = \frac{sin(nx)}{n} \in C^1[0; 1], f_n \uniconv 0$. Тогда в $c$-норме: 
+        \[
+        ||f_n - f|| \to 0, ||D f_n - Df|| = ||cos(nx)|| \nrightarrow 0.
+        \]
+    \end{enumerate}
+\end{example}
+
+\begin{example}[Оператор Вольтерра]
+$E_1 = E_2 = C[0, 1], A: E_1 \to E_2$.
+\[
+(Af)(x) = \int_0^x f(t)dt
+\]
+
+$\im A = \{g \in C^1[0, 1], g(0) = 0\}, \ke A = \{0\}$.
+\end{example}
+
+\begin{definition}
+$\mathcal{L}(E_1, E_2)$ --- пространство линейных ограниченных операторов, действующих из $E_1$ в $E_2$. Оно образует линейное пространство над $\mathbb{K}$.
+\end{definition}
+
+\begin{definition}
+Двойственное или сопряженное пространство это
+    \[E^* = \mathcal{L}(E, \K),\]
+    где $\K = \R$ или $\C$, $E$ --- линейное нормированное пространство. 
+\end{definition}
+
+\begin{theorem}
+Пусть $E_1, E_2$ --- линейные нормированные пространства. Тогда
+
+1) $\mathcal{L}(E_1, E_2)$ --- линейное нормированное пространство с нормой $\|A\|$.
+
+2) Если $E_2$ --- банахово, то $\mathcal{L}(E_1, E_2)$ --- банахово.
+\end{theorem}
+
+\begin{proof}
+1) То, что это линейное пространство --- очевидно. Проверим неравенство треугольника для нормы:
+
+\[
+\|A_1 + A_2\| = \sup_{\|x\| = 1} \|(A_1 + A_2) x\| \leqslant 
+\sup_{\|x\| = 1} (\|A_1 x\| + \|A_2 x\|) \leqslant 
+\sup_{\|x\| = 1} \|A_1 x\| + \sup_{\|x\| = 1} \|A_2 x\| = \|A_1\| + \|A_2\|
+\]
+
+2) Покажем, что $\mathcal{L}(E_1, E_2)$ --- полное, если $E_2$ -- полное.
+
+Пусть $\{A_n\} \subset \mathcal{L}$ -- фундаментальна, то есть
+$\forall \varepsilon > 0\ \exists N : \forall n, m \geqslant N \|A_n - A_m\| < \varepsilon$.
+
+Заметим, что 
+\[
+\forall x \in S_{E_1}(0, 1)
+\|A_n x - A_m x\| = \|(A_n - A_m) x\| \leqslant \|A_n - A_m\| \cdot
+\underbrace{\|x\|}_{=1} < \varepsilon
+\]
+
+Получается, что $\forall x \in S_{E_1}(0, 1)$ последовательность $\{A_n x\}$ фундаментальна (в $E_2$). Так как $E_2$ --- полное, то эта последовательность сходится. Обозначим её предел через $Ax$. $A$, очевидно, линейный оператор. Покажем, что он ограничен.
+
+Так как $\|\cdot\|$ --- непрерывная функция, то $\|A_n x\| \to \|A x\|$. Воспользуемся тем,
+что $\{A_n\}$ ограничена (из-за фундаментальности), 
+то есть $\exists K : \forall n \ \|A_n\| \leqslant K$.
+$\|A_n x\| \leqslant \|A_n\| \|x\| \leqslant K \|x\|$. Переходя к пределу в этом неравенстве, получаем, что $\|A x\| \leqslant K \|x\|$. 
+Таким образом, $A$ является ограниченным линейным оператором и лежит в $\mathcal{L}(E_1, E_2)$. Осталось показать, что $A_n \to A$.
+
+$\forall x \in S_{E_1}(0, 1) \|A_n x - A_m x\| < \varepsilon$. Зафиксируем номер
+$n$ и устремим $m$ к бесконечности. 
+Тогда $\|A_n x - A x\| \leqslant \varepsilon\ \forall x \in S_{E_1}(0, 1)$, а значит
+$\sup\limits_{\|x\| = 1} \|A_n x - A x\| \leqslant \varepsilon$.
+Это и означает, что $\|A_n - A\| \to 0$, то есть $A_n \to A$.
+\end{proof}
+
+\begin{corollary}
+Если $E_1 = E_2 = E$ --- банахово, то $\mathcal{L}(E) = \mathcal{L}(E, E)$ --- банахово.
+\end{corollary}
+
+\begin{corollary}
+Если $E$ --- линейное нормированное пространство, то $E^*$ всегда полное.
+\end{corollary}
+
+--------------------------------------------------------------------------------
+Билет 14
+
+\begin{theorem}\label{extrapolate-to-closure}
+    Пусть $E_1$~--- линейное нормированное пространство, $E_2$~--- банохово пространство и $A$~--- линейный ограниченный оператор: $A: D(A) \to E_2$, где $D(A)$ линейное многообразие в $E_1 = \overline{D(A)}$. Тогда сущеествует и единственно продолжение оператора $A$ до замыкания его области определения.\\
+    То есть $\exists! \widetilde{A} \in \mathcal{L}(E_1; E_2)$:
+    \begin{enumerate}
+        \item $ \widetilde{A}\rvert_{D(A)} = A$,
+        \item $\|\widetilde{A}\| = \|A\|$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}\\
+    \noindent\textit{Единственность.}\\
+    Пусть есть $\widetilde{A}^1$ и $\widetilde{A}^2$. Из замкнутости $E_1$, 
+    \(\forall x \in E_1 \; \exists \{x_n\} \in D(A):\; x_n \to x.\)\\
+    При этом, $\widetilde{A}^1 x = \lim\limits_{n \to \infty} Ax_n = \widetilde{A}^2 x$. Значит, $\widetilde{A}^1 = \widetilde{A}^2$.
+    \\
+    \noindent\textit{Существование.}\\
+    Определим оператор $\widetilde{A}$ по формуле $\widetilde{A}x = \lim\limits_{n \to \infty} Ax_n$. Для корректности необходимо показать:
+    \begin{enumerate}[label=\alph*)]
+        \item предел $\lim\limits_{n \to \infty} Ax_n$ существует,
+        \item предел не зависит от выбора $\{x_n\}$,
+        \item действительно $\widetilde{A}\rvert_{D(A)} = A$.
+    \end{enumerate}
+    Покажем:
+    \begin{enumerate}[label=\alph*)]
+        \item Так как $\{x_n\}$ сходится, она фундаментальна, значит последовательность $\{Ax_n\} \subset E_2$ фундаментальна. Пространство $E_2$ банахово, поэтому предел $\lim\limits_{n \to \infty} Ax_n$ существует.
+        \item Пусть есть две последовательности $\{x_n'\}$ и $\{x_n''\}$, сходящиеся к одному и тому же $x \in E_1$. Пусть пределы $\lim\limits_{n \to \infty} Ax_n'$ и $\lim\limits_{n \to \infty} Ax_n''$ разные. Тогда возьмем последовательность
+        $\{y_n\}$ полученную чередованием элементов $\{x_n'\}$ и $\{x_n''\}$. Но получим, что $\{Ay_n\}$ расходится. Противоречие пункту $a)$.
+        \item Возьмем константную последовательность $\{x\}_{n=1}^{\infty}, x \in D(A)$. Очевидно, что $\lim\limits_{n \to \infty} Ax = Ax$. По предыдущему пункту $\lim\limits_{n \to \infty} Ax_n$ не зависит от выбора последовательности, значит $\widetilde{A}\rvert_{D(A)} = A$.
+    \end{enumerate}
+
+    Осталось показать, что $\widetilde{A}$~--- линейный ограниченный оператор. Линейность очевидна из линейности $A$ и $\lim$.
+
+    Ограниченность (а значит и непрерывность) очевидна из непрерывности нормы:
+    \begin{align*}
+        &\widetilde{A}x = \lim\limits_{n \to \infty} Ax_n \xrightarrow{\text{непрерывность нормы}} \|Ax_n\| \to \|\widetilde{A}x\|,\\
+        &\|Ax_n\| \leqslant \|A\|\cdot\|x_n\| \to \|A\|\cdot\|x\|.
+    \end{align*}
+    Значит $\widetilde{A}$ ограничен.
+\end{proof}
+
+--------------------------------------------------------------------------------
+Билет 15
+
+\begin{theorem}[Банаха--Штейнгауза, доказательство не Коновалова]\label{Banach-Steingaus}
+Пусть \(X, Y\)~--- линейные нормированные пространства, причём \(X\) полно. Пусть \(\mathcal{A} \subseteq \mathcal{L}(X, Y)\) --- семейство линейных непрерывных операторов.\\
+\noindentТогда из \(\forall x \in X \left(\sup\left\{\|Ax\|_Y:\: A \in \mathcal{A} \right\} < \infty \right)\) следует \(\sup\left\{\|A\|:\: A \in \mathcal{A} \right\} < \infty\). То есть, из поточечной ограниченности следует равномерная ограниченость.
+\end{theorem}
+\begin{proof} Пусть
+\(X_n = \left\{x \in X:\: \sup\limits_{A \in \mathcal{A}} \|A(x)\|_Y \leqslant n \right\}\).
+Так как 
+\[\sup\limits_{A \in \mathcal{A}} \|A(x)\|_Y \leqslant n \Leftrightarrow \forall A \in \mathcal{A} \left(\|A(x)\|_Y \leqslant n \right),\]
+перепишем супремум через пересечение: \(X_n = \bigcap\limits_{A \in \mathcal{A}} \left\{x \in X:\: \|A(x)\|_Y \leqslant n \right\}\).
+
+Для любого \(A \in \mathcal{A}\) множество \(\left\{x \in X:\: \|A(x)\|_Y \leqslant n \right\}\) замкнуто как прообраз замкнутого шара \(\overline{B}_n(0) \subset Y\) под действием непрерывного отображения~(\ref{closed-continuous-closed}), а пересечение любого количества замкнутых множеств замкнуто.
+% Покажем, что \(\forall n\; X_n\) замкнуто. Для начала покажем непрерывность супремума, для этого воспользуемся тем, что для каждого отдельного оператора в каждой точке из его непрерывности можно выбрать такую дельту, что норма разности образа точки и точки, сдвинутой не более чем на дельту по норме, будет не очень большой:
+% \[\forall \varepsilon > 0 \forall A \in \mathcal{A} \forall x \in X \exists \delta_{xA} \forall h \left(\|h\|_X < \delta_{xA} \rightarrow \|A(x+h) - A(x)\|_Y < \varepsilon \right) \]
+% В каждой точке \(x \in X\) можно выбрать положительный инфинум по дельтам \\ \(\delta_{x} = \inf\limits_{A \in \mathcal{A}} \{\delta_{xA}\} > 0\), так как если бы он был равен 0, то супремум нормы образов был бы равен \(\infty\), значит, \(\sup\limits_{A  \in \mathcal{A}}A\) непрерывна в \(X\). Теперь рассмотрим \(\{x_k\}_{k \in \N} \subseteq X_n\) --- сходящуюся к \(x^*\) последовательность, тогда \(\{\sup\limits_{A \in \mathcal{A}}A(x_k)\} \subseteq \overline{B}_n(0)\). В силу секвенциальной непрерывности \(\sup\limits_{A \in \mathcal{A}}A\) тоже сходится(назовём предел \(y^*\)), а в силу замкнутости шара \(y^* \in \overline{B}_n(0)\), а так как в \(X_n\) лежат все точки, образы которых под действием \(\sup\limits_{A \in \mathcal{A}}A\) переходят в \(\overline{B}_n(0)\), то и \(x^*\) как проообраз \(y^* \in \overline{B}_n(0)\) лежит в \(X_n\). Значит, \(X_n\) замкнуто, так как содержит все свои предельные точки.
+
+Так как\(\bigcup\limits_{n \in \N }X_n = X\), то по \hyperref[Ber-equiv]{теореме Бэра} \(\exists m\; \exists \overline{B}_\varepsilon(x_0):\; \overline{B}_\varepsilon(x_0) \subseteq X_m \). Пусть \(u \in X, \; \|u\|_X = 1\). Тогда рассмотрим \(A \in \mathcal{A}\):
+\begin{multline*}
+    \|A(u)\|_Y = \frac{1}{\varepsilon} \|A(\varepsilon u) + A(x_0) - A(x_0) \|_Y = \frac{1}{\varepsilon} \|A(x_0 + \varepsilon u) - A(x_0) \|_Y \leqslant \\
+    \leqslant \frac{1}{\varepsilon} \left(\|A(x_0 + \varepsilon u)\|_Y + \|A(x_0)\|_Y \right) \leqslant \frac{1}{\varepsilon}(m + m)
+\end{multline*}
+Последнее неравенство из того что $x_0$ в $X_m$ и $x_0 + \varepsilon u$ в $ \overline{B}_\varepsilon(x_0) \subset X_m$.
+В неравенстве сверху можно перейти к супремуму по $u$ и получить \(\forall A \in \mathcal{A} \left(\|A\| \leqslant \frac{2m}{\varepsilon} < \infty \right)\).
+
+\end{proof}
+
+\begin{corollary}
+$X$ -- полное $\Rightarrow L(X, Y)$ замкнуто относительно поточечной сходимости, то есть если $A_n \in L(X, Y), A_nx \to Ax \quad \forall x \in X$, то $A \in L(X, Y)$
+\end{corollary}
+
+\begin{note}
+    Обе теоремы $16$ билета --- следствия \hyperref[Banach-Steingaus]{теоремы Банаха--Штейнгауза}.
+\end{note}
+
+--------------------------------------------------------------------------------
+Билет 16
+
+\begin{theorem}[Полнота $\mathcal{L}(E_1, E_2)$ относительно поточечной сходимости]
+    Пусть $E_1, E_2$~--- банаховы пространства, $\{A_n\} \subset \mathcal{L}(E_1, E_2):\; \forall x \in E_1\; \{A_n x\}$~--- фундаментальна в $E_2$.\\
+    \noindentТогда
+    \[\exists A \in \mathcal{L}(E_1, E_2):\; \forall x \in E_1\; \lim\limits_{n \to \infty} A_n x = Ax.\]
+\end{theorem}
+\begin{proof}
+    Так как $\{A_n x\}$ фундаментальна в банаховом $E_2$, то $\exists \lim\limits_{n \to \infty} A_n x,\; Ax := \lim\limits_{n \to \infty} A_n x$.
+
+    Осталось показать, что определенный таким образом оператор~--- линейный непрерывный. Линейность очевидна из линейности предела и каждого $A_n$. 
+
+    Так как $\forall x \in E_1\; \{A_n x\}$ фундаментальна, то $\{A_n\}$ поточечно ограничена и по теореме~\ref{Banach-Steingaus} ограничена равномерно:
+    \[\exists M\; \forall n \in \N \; \|A_n\| \leqslant M.\]
+
+    Тогда
+    \[\|A_n x\| \leqslant \|A_n\| \cdot \|x\| \leqslant M\|x\|,\; \|A_nx\| \to \|Ax\| \implies \|Ax\| \leqslant M\|x\|.\]
+    
+    То есть оператор ограничен и непрерывен, а значит $A \in \mathcal{L}(E_1, E_2).$
+\end{proof}
+
+\begin{theorem}[Критерий поточечной сходимости операторов из $\mathcal{L}(E_1, E_2)$]
+\label{bshetengcorollary}
+    Пусть $E_1$~--- банахово, $E_2$~--- линейное нормированное пространство. Верно, что $\forall\; \{A_n\} \in \mathcal{L}(E_1, E_2),\; A \in \mathcal{L}(E_1, E_2)$:
+    \[
+    A_n \xrightarrow{\textit{поточечно}} A \Leftrightarrow
+    \begin{cases}
+        1.\;\text{Последовательность }\{\|A_n\|\}\text{ ограничена } M,\\
+        2.\;\forall s \in S, \; \overline{[S]} = E_1: \; A_n s \to As.
+    \end{cases}
+    \]
+\end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item[$\Rightarrow$] Пункт $2.$ очевиден. Из поточечной сходимости $\{A_n x\}$ следует поточечная ограниченость $\{A_n x\}$. Значит, по теореме~\ref{Banach-Steingaus} последовательность $\{\|A_n\|\}$ ограничена.
+        \item[$\Leftarrow$]
+        Так как множество $[S]$ всюду плотно в $E_1$,
+        \[\forall \varepsilon > 0\; \forall x \in E_1\; \exists y \in [S]:\; \|x - y\| < \varepsilon.\]
+
+        Тогда для $y$, из пункта $2.$ верно:
+        \(\exists N(\varepsilon, y):\; \forall n > N\; \|A_n y - Ay\| < \varepsilon\). Перейдем к $x \in E_1$:
+        \[
+            \|A_n x - Ax\| \leqslant \|Ax - Ay\| + \|A_n y - Ay\| + \|A_n y - A_n x\|
+             \leqslant \varepsilon \|A\| + \varepsilon + \varepsilon \|A_n\| \leqslant \varepsilon (\|A\| + M + 1).
+        \]
+        Значит $A_n \xrightarrow{\textit{поточечно}} A$ на $E_1$.
+    \end{itemize}
+\end{proof}
+\begin{note}
+    Теорема означает, что для поточечной сходимости последовательности из непрерывных операторов необходимо и достаточно чтобы члены последовательности были ограничены и при этом была поточечная сходимость на некотором множестве, линейная комбинация которого всюду плотна.
+\end{note}
+
+--------------------------------------------------------------------------------
+Билет 17
+
+\begin{definition}[Линейный функционал] Линейный оператор, действующий из нормированного пространства в скалярное поле называется \textit{линейным функционалом}. Множество линейных функционалов над нормированным пространством $X$ обозначается как \(X^* = \mathcal{L}(X, \mathbb{K})\).
+\end{definition}
+\begin{theorem}[Рисса--Фреше]\label{Riss-Freshe} Пусть существуют гильбертово пространство \(H\) и линейный ограниченный функционал \(f \in H^*\) в пространстве \(H\). Тогда существует единственный элемент \(y\) пространства \(H\), такой, что для произвольного \(x \in H\) выполняется \(f(x)=\langle y,x\rangle\). При том \(\|f\| = \|y\|\).
+\end{theorem}
+\begin{proof} \\
+\textit{Существование.} Пусть \(f \equiv 0\), тогда \(y = 0\). Требуемые свойства, очевидно, выполняются. Теперь пусть \(f \not\equiv 0\), тогда \(\ker f \neq H\), а значит, \(\exists b \in \ker f^{\perp} \setminus \{0\}\). Для \(x \in H\) рассмотрим \(p_x = x - \frac{f(x)}{f(b)}b\). Для него \(f(p_x) = f(x) - \frac{f(x)}{f(b)}f(b) = 0\). Значит, \(p_x \in \ker f\) и \(\langle b, p_x \rangle = 0\). Подставим \(p_x\):
+\[0 = \left\langle b, x - \frac{f(x)}{f(b)}b \right\rangle = \left\langle b, x \right\rangle - \frac{f(x)}{f(b)}\|b\|^2 \Rightarrow f(x) = \frac{f(b)}{\|b\|^2} \left\langle b, x \right\rangle = \left\langle \frac{f(b)}{\|b\|^2} b, x \right\rangle.\]
+Обозначим первый член скалярного произведения как \(y\). Как мы видим, он удовлетворяет требованию выразимости из формулировки теоремы.
+\\
+
+\noindent\textit{Единственность.} Предположим, что \(\exists z \forall x \in H\left(f(x)= \left\langle z, x \right\rangle \right)\). Тогда в силу линейности скалярного произведения \(\forall x \in H \left(\left \langle y-z, x \right\rangle = 0 \right)\). Так как \(y-z \in H\), то \(0 = \left\langle y-z, y-z \right\rangle = \|y-z\|^2\). Значит, \(y-z = 0\) и \(z=y\)
+\\
+
+\noindent\textit{Равенство норм.} Из КБШ имеем \(\forall x \in H \left(|f(x)| = |\left\langle y, x \right\rangle| \leqslant \|y\| \cdot \|x\| \right)\), откуда по определению нормы функционала получаем \(\|f\| \leqslant \|y\|\). Также так как \(y \in H\), то \[\|y\|^2 = \langle y, y \rangle = f(y) = |f(y)| = \|f(y)\| \leqslant \|f\| \cdot \|y\|.\] Значит, \(\|y\| \leqslant \|f\|\), и \(\|f\| = \|y\|\).
+\end{proof}
+
+\begin{note}
+Таким образом, существует изоморфизм между пространствами $H$ и $H^*$
+\end{note}
+
+--------------------------------------------------------------------------------
+Билет 18
+
+\begin{theorem}[Хана--Банаха]\label{Han-Banah}
+Пусть $E$~--- ЛНП. $M \subset E$~--- линейное многообразие, $f$~--- линейный ограниченный функционал на $M$. Тогда $\exists \widetilde{f} \in E^*$:
+\begin{enumerate}
+    \item  $ \widetilde{f} |_{M} = f$
+    \item \(\| \widetilde{f} \| = \|f\|\)
+\end{enumerate}
+\end{theorem}
+
+\begin{note} Ниже приведено доказательство для сепарабельных пространств. Теорема верна и для несепарабельных, но там в доказательстве используется трансфинитная индукция.
+\end{note}
+
+\begin{proof} Докажем для случая $E$~--- вещ. сепарабельно. 
+\begin{itemize}
+    \item [Шаг 1.] \href{https://vk.com/audio2000232946_456244622}{"Завоевание новых измерений"}: $(M, f), M \neq E, \Rightarrow \exists x_0 \notin M$
+
+Тогда рассмотрим $M_1 = M \oplus [x_0]$; продолжим $f$ на $M_1$ с сохранением нормы: $y = x + \alpha x_0 \in M_1$, $x \in M, \alpha \in \R$; $f_1(y) = f_1(x) + \alpha f_1(x_0) = f(x) + \alpha a$. Существует ли $a$ такое, что $\|f_1\| = \|f\|$? Очевидно, что $\|f_1\| \geqslant \|f\|$, тогда осталось показать существование такого \(a\), что $\|f_1\| \leqslant \|f\|$
+\[\exists a: \forall y \in M_1 |f(x) + \alpha a | = |f_1(y)| \leqslant \|f\| \cdot \|y\| = \|f\| \cdot \| x + \alpha x_0\|.\] Если $\alpha = 0$, то мы попали на $M$, неравенство выполнено и мы победили. Если это не так, то $\alpha \neq 0$; исходное неравенство эквивалентно $|f(\frac{x}{\alpha}) + a| \leqslant \|f\| \cdot \| \frac{x}{\alpha} + x_0 \| $, причём $\frac{x}{\alpha} = z$. Тогда нам очень хочется доказать, что
+\begin{align}
+    - \|f \| \cdot \| z + x_0 \| &\leqslant f(z) + a \leqslant \| f \| \cdot \| z + x_0 \|\\
+- f(z) - \|f \| \cdot \| z + x_0 \| &\leqslant a \leqslant - f(z) + \| f \| \cdot \| z + x_0 \|.
+\label{what-we-want-han-banah}
+\end{align}
+Нам достаточно, чтобы $\sup$ левой части по всем $z$ был меньше $\inf$ правой части неравенства по всем $z$. Тогда на самом деле нам достаточно показать, что
+\[\forall z_1, z_2\; -f(z_1) - \|f \| \cdot \| z_1 + x_0 \| \leqslant - f(z_2) + \| f \| \cdot \| z_2 + x_0 \| \]--- просто подставили $z_1$ в левую часть неравенства, а $z_2$ в правую. Преобразуем, следующее должно быть верно:
+\[f(z_2) - f(z_1) \leqslant \|f\| \cdot (\| z_1 + x_0 \| + \| z_2 + x_0 \|).\]
+Это верно, если будет выполнено более сильное утверждение:
+\[|f(z_2) - f(z_1)| \leqslant \|f\| \cdot (\| z_1 + x_0 \| + \| z_2 + x_0 \|).\]
+Но мы знаем:
+\[|f(z_2) - f(z_1)| = |f(z_2 - z_1)| \leqslant \|f\| \cdot \| z_2 - z_1 \| = \|f\| \cdot \| z_2 + x_0 - x_0 - z_1 \| \leqslant \|f\| \cdot (\| z_2 + x_0 \| + \| x_0 + z_1 \| ).\]
+Ура, победили. Получили, что $\sup$ левой части~(\ref{what-we-want-han-banah}) не больше $\inf$ правой части, а значит для любого $z$ действительно можно выбрать такое число $a$.
+ \item [Шаг 2.] Теперь мы готовы запустить индукцию: предположили, что $E$~--- сепарабельное. \\
+ Тогда пусть $X = \{ x_n \}_{n=0}^{\infty}$: $\overline{X} = E$; $M_0 = M,\; x_0 \notin M$, берём $x_{n-1}$ и получаем $M_n = M_{n-1} + [x_{n-1}], x_n \notin M_n $. Введём $M_{\infty} = \bigcup\limits_{n \in \N} M_n$ -- линейное многообразие. $f_{\infty} | _{M_n} = f_n \Rightarrow x \in M_n $ и $E = \overline{X} \in \overline{M}_{\infty}$
+
+По теореме~\ref{extrapolate-to-closure} $f_{\infty}$ единственным образом продолжается до $\widetilde{f} \in E^*$. Победа!
+\end{itemize}
+\end{proof}
+
+\noindent\textbf{Следствия из Теоремы Хана-Банаха}.
+
+\begin{corollary} Пусть $E$ - линейное нормированное пространство, $M \subsetneq E$ --- линейное многообразие, $x_0 \notin \overline{M} $. Тогда $\exists f \in E^*$ такой, что:
+
+1. $f |_M = 0$, т.е. $M \subset Ker f$
+
+2. $f(x_0) = 1$
+
+3. $\|f\| = \frac{1}{\rho(x_0, M)}$
+\end{corollary}
+
+\begin{proof} Рассмотрим $M_1 = M \oplus [x_0]$, $y = x + \alpha \cdot x_0$
+Тогда $f_1(y) = f(x) + \alpha \cdot f(x_0) = 0 + \alpha \cdot 1 = \alpha$ (как просят в условии) - по теореме Хана-Банаха $\exists f \in E^*: f|_{M_1} = f_1, \|f\|_{E^*} = \|f_1\|_{M_1^*}$
+
+Осталось показать, что $\|f_1\| = \frac{1}{\rho(x_0, M)} = \frac 1 \rho$. $f_1(y) = f_1(x + \alpha \cdot x_0), x \in M, \alpha \in \K$
+
+Для этого очень хочется что-то типа $\forall \eps > 0$ $\frac{1}{\rho} - \eps \leqslant \sup\limits_{y:\:\|y\| \neq 0} \frac{|f_1(y)|}{\|y\|} = \|f_1\| \leqslant \frac{1}{\rho}$
+
+1. Рассмотрим правую часть: $\|f_1\| \leqslant \frac{1}{\rho}$: $\frac{|f_1(y)|}{\|y\|} = \frac{|\alpha|}{\|y\|}$. Если $\alpha = 0$, то очевидно и мы победили; иначе $\frac{|\alpha|}{\|y\|} = \frac{1}{\|\frac{x}{\alpha} + x_0\|} \leqslant \frac{1}{\rho}$. 
+
+2. $\exists$ последовательность $x_n \in M: \|x_n + x_0 \| \to \rho$ (из определения $\rho$): $\frac{|f_1(y)|}{\|y\|} = \frac{|\alpha|}{\|y\|}  = \frac{1}{\|\frac{x}{\alpha} + x_0\|}$ = $\frac{1}{\|x_n + x_0\|} \to \frac{1}{\rho}$. Победа!
+
+
+\end{proof}
+
+\begin{corollary} Если $x \in E$, то $\exists f \in E^*$:
+
+1. $\|f\| = 1$
+
+2. $f(x) = \|x\|$
+\end{corollary}
+\begin{proof}
+Возьмём в следствии 1 $M = \{0\}$; $\frac{x}{\|x\|}$ в качестве $x_0 \Rightarrow \exists f:$ \\ 1) $ f|_{\{0\}} = 0$ -- верно, 2) $ f(x) = \|x\|$ - верно, $3) \|f\| = \frac{1}{\rho \left(\frac{x}{\|x\|}, 0 \right)} = 1$
+\end{proof}
+
+\begin{corollary} Два эквивалентных утверждения:
+\label{hbcorollary3}
+\begin{itemize}
+    \item Если $\forall f \in E^* \; f(x) = f(y)$, то $x = y$
+    \item Если $\forall f \in E^* \; f(x) = 0$, то $x = 0$
+\end{itemize}
+\end{corollary}
+\begin{proof} 
+От противного: пусть $\exists x \neq 0$: $\forall f \in E^*$ $f(x) = 0$. Но тогда по следствию 2 $\exists f \in E^*: f(x) = \| x\| \neq 0$ - противоречие.
+\end{proof}
+
+\begin{corollary}
+\label{hbcorollary4}
+$\forall x \in E $ $\|x\| = \sup |f(x)|$, где $\sup$ берётся по таким $f$, что $\| f\| _{E^*} = 1$\end{corollary}
+\begin{proof} 
+$\sup\limits_{\|f\| = 1} |f(x)| \leqslant \sup\limits_{\|f\| = 1} \|f\| \cdot \|x\| = \|x\|$.
+
+Осталось показать в обратную сторону: зафиксируем $x$. Если $x = 0$, то мы победили, иначе $\sup\limits_{\|f\| = 1} |f(x)| \geqslant |f_x (x) | = \|x\|$, где $f_x(x)$ - функция из следствия 2. Победа!
+\end{proof}
