@@ -52,6 +52,7 @@ def get_chunks_embeddings(filename, modelname, chunks):
 
             if "error" in response:
                 print(f"API error: {response['error']}")
+                print(f"chunk:{chunk}")
                 continue
 
             embeddings.append(response["embedding"])
@@ -107,6 +108,28 @@ def query_model_with_context(
         system_content = system_prompt + "\n".join(
             paragraphs[item[1]] for item in most_similar_chunks
         )
+
+        messages = [
+            {"role": "system", "content": system_content},
+            {"role": "user", "content": prompt},
+        ]
+
+        payload = {"model": modelname, "messages": messages}
+        escaped_payload = json.dumps(payload).replace('"', '\\"')
+        raw_response = run_command(
+            f'curl -s http://127.0.0.1:11434/api/chat -d "{escaped_payload}"'
+        )
+
+        aggregated_content = parse_json_lines(raw_response)
+        return {"content": aggregated_content}
+    except (RuntimeError, json.JSONDecodeError, TypeError, ValueError) as e:
+        print(f"Error querying model with context: {prompt}\nDetails: {e}")
+        return None
+
+
+def query_model_without_context(modelname, system_prompt, prompt):
+    try:
+        system_content = system_prompt
 
         messages = [
             {"role": "system", "content": system_content},
